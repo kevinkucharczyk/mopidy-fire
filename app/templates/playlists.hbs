@@ -1,0 +1,7 @@
+<div class="row">
+  <ul>
+    {{#each model as |playlist|}}
+      <li>{{#link-to "playlist" playlist.uri}}{{playlist.name}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</div>
