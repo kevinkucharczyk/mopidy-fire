@@ -1,10 +1,12 @@
-<div class="row">
-  Mopidy Fire
-</div>
-<div class="row">
-  <ul class="menu">
-    <li>{{#link-to "playlists"}}Playlists{{/link-to}}</li>
+<div class="sidebar">
+  <ul class="sidebar__menu">
+    <li class="sidebar__menu-item">{{link-to "Playlists" "playlists" class="sidebar__menu-link"}}</li>
+    <li class="sidebar__menu-item">{{link-to "Browse" "browse" class="sidebar__menu-link"}}</li>
+    <li class="sidebar__menu-item">{{link-to "Search" "search" class="sidebar__menu-link"}}</li>
+    <li class="sidebar__menu-item">{{link-to "Settings" "settings" class="sidebar__menu-link"}}</li>
   </ul>
 </div>
 
-{{outlet}}
+<div class="content">
+  {{outlet}}
+</div>

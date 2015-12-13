@@ -1,0 +1,49 @@
+$bg-color: #403E46;
+$gold: #BFAA7B;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  height: 100%;
+  width: 15em;
+  
+  background-color: $bg-color;
+}
+
+.sidebar__menu {
+  margin: 0;
+  padding: 0;
+  
+  list-style-type: none;
+}
+
+.sidebar__menu-link {
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  width: 100%;
+  
+  color: #F8F8FF;
+  
+  font-weight: 600;
+  
+  transition: all 0.2s ease;
+}
+
+.sidebar__menu-link:hover {
+  color: #fff;
+  background-color: lighten($bg-color, 25%);
+}
+
+.sidebar__menu-link:focus,
+.sidebar__menu-link.active {
+  color: #000;
+  background-color: $gold;
+}
+
+.content {
+  margin-right: 15em;
+  transform: translate3d(15em, 0, 0);
+}
