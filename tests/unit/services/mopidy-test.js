@@ -1,12 +1,18 @@
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('service:mopidy', 'Unit | Service | mopidy', {
-  // Specify the other units that are required for this test.
-  // needs: ['service:foo']
+  beforeEach: function() {
+    window.Mopidy = function() { 
+      this.on = function(callable) {
+        callable("state:online");
+      };
+    };
+  }
 });
 
 // Replace this with your real tests.
 test('it exists', function(assert) {
   let service = this.subject();
+
   assert.ok(service);
 });
