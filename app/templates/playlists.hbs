@@ -1,7 +1,9 @@
-<div class="row">
-  <ul>
-    {{#each model as |playlist|}}
-      <li>{{#link-to "playlist" playlist.uri}}{{playlist.name}}{{/link-to}}</li>
-    {{/each}}
-  </ul>
+<div class="section-header">
+  Playlists
+</div>
+
+<div class="row section-body">
+  {{#each model as |playlist|}}
+    {{mf-playlist-tile playlist=playlist}}
+  {{/each}}
 </div>

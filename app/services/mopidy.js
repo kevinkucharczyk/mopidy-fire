@@ -65,7 +65,7 @@ export default Ember.Service.extend({
   },
   
   getPlaylists() {
-    return this._call('playlists', 'asList');
+    return this._call('playlists', 'getPlaylists');
   },
   
   getPlaylist(uri) {

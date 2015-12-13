@@ -1,0 +1,5 @@
+{{#link-to "playlist" playlist.uri class="playlist-tile__link"}}
+  <img src={{image}} class="playlist-tile__cover" />
+  <div class="playlist-tile__title">{{playlist.name}}</div>
+  <div class="playlist-tile__subtitle">{{trackCount}} track{{if tracksPlural 's'}}</div>
+{{/link-to}}
