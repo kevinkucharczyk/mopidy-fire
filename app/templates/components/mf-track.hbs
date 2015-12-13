@@ -1,2 +1,12 @@
-{{track.name}} <button type="button" class="button" {{action 'playTrack' track.uri}}>Play</button>
-<img src={{image}} />
+<div class="small-12 medium-4 track__title">
+  {{track.name}}
+</div>
+<div class="small-5 medium-3 track__artist">
+  {{track.artists.firstObject.name}}
+</div>
+<div class="small-5 medium-4 track__album">
+  {{track.album.name}}
+</div>
+<div class="small-2 medium-1 track__duration">
+  {{format-duration track.length}}
+</div>

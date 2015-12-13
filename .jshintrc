@@ -2,6 +2,7 @@
   "predef": [
     "document",
     "Mopidy",
+    "moment",
     "window",
     "-Promise"
   ],

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['playlist-tile', 'small-4 medium-3 large-2'],
+  classNames: ['playlist-tile', 'small-6 medium-3 large-2'],
   
   didReceiveAttrs() {
     let tracks = this.get('playlist.tracks');

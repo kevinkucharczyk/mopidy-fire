@@ -69,7 +69,7 @@ export default Ember.Service.extend({
   },
   
   getPlaylist(uri) {
-    return this._call('playlists', 'getItems', { uri: uri });
+    return this._call('playlists', 'lookup', { uri: uri });
   },
   
   getImages(uris) {

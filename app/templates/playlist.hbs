@@ -1,12 +1,10 @@
-<div class="row">
-  <ul>
-    {{#each model as |track|}}
-      {{mf-track track=track}}
-    {{/each}}
-  </ul>
+<div class="section-header">
+  <img src={{image}} class="section-header__cover" />
+  {{model.name}}
 </div>
 
-<div class="row">
-  <button type="button" class="button" {{action 'play'}}>Play</button>
-  <button type="button" class="button" {{action 'stop'}}>Stop</button>
+<div class="section-body">
+  {{#each model.tracks as |track|}}
+    {{mf-track track=track}}
+  {{/each}}
 </div>

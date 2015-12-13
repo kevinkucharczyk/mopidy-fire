@@ -5,13 +5,17 @@ export default Ember.Route.extend({
     return this.get('mopidy').getPlaylist(params.uri);
   },
   
-  actions: {
-    play() {
-      this.get('mopidy').play();
-    },
+  afterModel(model) {
+    let tracks = model['tracks'];
     
-    stop() {
-      this.get('mopidy').stop();
+    if(tracks === undefined || tracks.length === 0) {
+      this.controller.set('image', null);
+    } else {
+      let uri = tracks.get('firstObject.uri');
+      this.get('mopidy').getImages([uri]).then((response) => {
+        let images = response[uri];
+        this.controller.set('image', images[2]['uri']);
+      });
     }
   }
 });
