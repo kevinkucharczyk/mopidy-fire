@@ -16,6 +16,6 @@ export default Ember.Component.extend({
         let images = response[uri];
         this.set('image', images[1]['uri']);
       });
-    };
+    }
   }
 });
