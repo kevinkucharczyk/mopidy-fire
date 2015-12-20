@@ -1,8 +1,8 @@
 <div class="footer__track">
-    {{#if currentTrack}}
-        <span class="footer__track-title">{{currentTrack.name}}</span> -
-        <span class="footer__track-artist">{{currentTrack.artists.firstObject.name}}</span>
-    {{/if}}
+  {{#if hasTrack}}
+    <span class="footer__track-title">{{currentTrack.name}}</span> -
+    <span class="footer__track-artist">{{currentTrack.artists.firstObject.name}}</span>
+  {{/if}}
 </div>
 
 <div class="footer__controls">
