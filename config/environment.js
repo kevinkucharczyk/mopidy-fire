@@ -6,7 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    mopidyURL: '127.0.0.1',
+    mopidyURL: '192.168.33.10',
     mopidyPort: '6680',
     EmberENV: {
       FEATURES: {
@@ -19,7 +19,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-    
+
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "'self'",
