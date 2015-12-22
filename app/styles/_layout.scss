@@ -85,11 +85,6 @@ body {
   padding: 50px 50px 0;
 }
 
-.playlist-tiles {
-  margin-right: -20px;
-  margin-left: -20px;
-}
-
 .playlist-tile {
   padding: 0 20px 40px;
 
@@ -172,7 +167,6 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 4em;
   z-index: 100;
 
   background-color: darken($primary, 10%);
@@ -180,8 +174,8 @@ body {
 }
 
 .footer__track {
+  margin: 5px 0;
   text-align: center;
-  height: 40%;
 }
 
 .footer__track-title {
@@ -190,5 +184,59 @@ body {
 }
 
 .footer__controls {
-  height: 60%;
+  margin: 5px 0;
+}
+
+.footer__center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__time {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+.control {
+  font-size: 28px;
+  color: $gold-light;
+
+  transition: color 0.2s ease;
+}
+
+.control:hover {
+  color: lighten($gold-light, 25%);
+}
+
+.control__icon {
+  margin: 10px;
+}
+
+.progress-indicator {
+  width: calc(100% - 120px);
+  display: inline-block;
+}
+
+.progress-indicator:hover {
+  cursor: pointer;
+}
+
+.progress-indicator__bar {
+  position: relative;
+  height: 5px;
+  width: 100%;
+  margin: 20px 0;
+  background-color: $accent;
+}
+
+.progress-indicator__bar-current {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 20%;
+
+  background-color: $gold-light;
 }

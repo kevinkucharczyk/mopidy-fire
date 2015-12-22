@@ -26,7 +26,7 @@ module.exports = function(environment) {
       'font-src': "'self' https://fonts.gstatic.com  http://fonts.gstatic.com",
       'connect-src': "'self' ws://192.168.33.10:6680 ws://127.0.0.1:6680",
       'img-src': "'self' https://i.scdn.co http://i.scdn.co",
-      'style-src': "'self' https://fonts.googleapis.com http://fonts.googleapis.com",
+      'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.googleapis.com",
       'media-src': "'self'"
     }
   };
