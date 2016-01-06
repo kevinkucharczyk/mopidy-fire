@@ -1,14 +1,56 @@
 import config from '../config/environment';
 import Ember from 'ember';
 
+const Timer = Ember.Object.extend({
+  interval: 1000,
+  timestamp: 0,
+  callback: null,
+
+  schedule: function(f) {
+    return Ember.run.later(this, function() {
+      let currentTimestamp = this.get('timestamp');
+      let newTimestamp = Date.now();
+      let timeDiff = newTimestamp - currentTimestamp;
+      this.set('timestamp', newTimestamp);
+      f.apply(this, [timeDiff]);
+      this.set('timer', this.schedule(f));
+    }, this.get('interval'));
+  },
+
+  stop: function() {
+    Ember.run.cancel(this.get('timer'));
+  },
+
+  start: function() {
+    let timestamp = Date.now();
+    this.set('timestamp', timestamp);
+    this.set('timer', this.schedule(this.get('callback')));
+  }
+});
+
 export default Ember.Service.extend({
   currentTrack: null,
   currentVolume: 0,
   isMute: false,
+  isPlaying: false,
+  currentPosition: 0,
+
+  progressTracker: null,
 
   init() {
     this._super.apply(this, arguments);
     this._connect();
+
+    const service = this;
+    let progressTracker = Timer.create({
+      callback(difference) {
+        let currentPosition = service.get('currentPosition');
+        let newPosition = currentPosition + difference;
+        service.set('currentPosition', newPosition);
+      }
+    });
+
+    this.set('progressTracker', progressTracker);
   },
 
 	_connect() {
@@ -52,11 +94,35 @@ export default Ember.Service.extend({
     mopidy.on('event:trackPlaybackStarted', (data) => {
       let track = data.tl_track.track;
       this.set('currentTrack', track);
+      this.set('isPlaying', true);
+      this.set('currentPosition', 0);
+      this.get('progressTracker').start();
     });
 
     mopidy.on('event:trackPlaybackResumed', (data) => {
       let track = data.tl_track.track;
+      let timePosition = data.time_position;
       this.set('currentTrack', track);
+      this.set('isPlaying', true);
+      this.set('currentPosition', timePosition);
+      this.get('progressTracker').start();
+    });
+
+    mopidy.on('event:trackPlaybackPaused', () => {
+      this.set('isPlaying', false);
+      this.get('progressTracker').stop();
+    });
+
+    mopidy.on('event:trackPlaybackEnded', (data) => {
+      let timePosition = data.time_position;
+      this.set('isPlaying', false);
+      this.set('currentPosition', timePosition);
+      this.get('progressTracker').stop();
+    });
+
+    mopidy.on('event:seeked', (data) => {
+      let timePosition = data.time_position;
+      this.set('currentPosition', timePosition);
     });
 
     mopidy.on('event:volumeChanged', (data) => {
@@ -84,16 +150,16 @@ export default Ember.Service.extend({
     });
 	},
 
-  playTrack(track) {
+  playTrack(uri) {
     return this.clearTracklist().then(() => {
-      return this.add(track).then(() => {
+      return this.addTrack(uri).then(() => {
         return this.play();
       });
     });
   },
 
-  add(track) {
-    return this._call('tracklist', 'add', { uris: [track] });
+  addTrack(uri) {
+    return this._call('tracklist', 'add', { uris: [uri] });
   },
 
   clearTracklist() {
@@ -104,8 +170,25 @@ export default Ember.Service.extend({
     return this._call('playback', 'play');
   },
 
+  pause() {
+    return this._call('playback', 'pause');
+  },
+
   stop() {
     return this._call('playback', 'stop');
+  },
+
+  togglePlayPause() {
+    let isPlaying = this.get('isPlaying');
+    if(isPlaying) {
+      return this.pause();
+    } else {
+      return this.play();
+    }
+  },
+
+  seek(position) {
+    return this._call('playback', 'seek', { time_position: position });
   },
 
   getPlaylists() {

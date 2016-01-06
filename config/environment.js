@@ -6,7 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    mopidyURL: '192.168.33.10',
+    mopidyURL: '127.0.0.1',
     mopidyPort: '6680',
     EmberENV: {
       FEATURES: {
