@@ -214,16 +214,21 @@ body {
   margin: 10px;
 }
 
-.progress-indicator {
-  width: calc(100% - 120px);
+.control__icon--volume {
+  width: 26px;
+  text-align: left;
+}
+
+.slider {
+  width: 100%;
   display: inline-block;
 }
 
-.progress-indicator:hover {
+.slider:hover {
   cursor: pointer;
 }
 
-.progress-indicator__bar {
+.slider__bar {
   position: relative;
   height: 5px;
   width: 100%;
@@ -231,7 +236,7 @@ body {
   background-color: $accent;
 }
 
-.progress-indicator__bar-current {
+.slider__bar-current {
   position: absolute;
   left: 0;
   top: 0;
@@ -239,4 +244,12 @@ body {
   width: 20%;
 
   background-color: $gold-light;
+}
+
+.volume-control {
+    display: inherit;
+    width: 100%;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: center;
 }

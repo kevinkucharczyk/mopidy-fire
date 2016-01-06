@@ -3,6 +3,8 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   currentTrack: null,
+  currentVolume: 0,
+  isMute: false,
 
   init() {
     this._super.apply(this, arguments);
@@ -34,6 +36,14 @@ export default Ember.Service.extend({
     this._call('playback', 'getCurrentTrack').then((data) => {
       this.set('currentTrack', data);
     });
+
+    this.getVolume().then((volume) => {
+      this.set('currentVolume', volume);
+    });
+
+    this.getMute().then((state) => {
+      this.set('isMute', state);
+    });
   },
 
   _initListeners() {
@@ -47,6 +57,16 @@ export default Ember.Service.extend({
     mopidy.on('event:trackPlaybackResumed', (data) => {
       let track = data.tl_track.track;
       this.set('currentTrack', track);
+    });
+
+    mopidy.on('event:volumeChanged', (data) => {
+      let volume = data.volume;
+      this.set('currentVolume', volume);
+    });
+
+    mopidy.on('event:muteChanged', (state) => {
+      let muteState = state.mute;
+      this.set('isMute', muteState);
     });
   },
 
@@ -98,5 +118,26 @@ export default Ember.Service.extend({
 
   getImages(uris) {
     return this._call('library', 'getImages', { uris: uris });
+  },
+
+  getVolume() {
+    return this._call('mixer', 'getVolume');
+  },
+
+  setVolume(volume) {
+    return this._call('mixer', 'setVolume', { volume: volume });
+  },
+
+  getMute() {
+    return this._call('mixer', 'getMute');
+  },
+
+  setMute(state) {
+    return this._call('mixer', 'setMute', { mute: state });
+  },
+
+  toggleMute() {
+    let muteState = this.get('isMute');
+    return this.setMute(!muteState);
   }
 });

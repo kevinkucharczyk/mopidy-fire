@@ -1,0 +1,5 @@
+<button class="control" {{action "toggleMute"}}>
+  <i class="control__icon fa {{if isMute 'fa-volume-off' 'fa-volume-up'}} control__icon--volume"></i>
+</button>
+
+{{mf-slider currentPosition=volume onMouseUp=(action 'setVolume')}}

@@ -22,17 +22,13 @@
       {{format-duration 0}}
     </div>
 
-    {{mf-progress-indicator}}
+    {{mf-slider currentPosition=0}}
 
     <div class="footer__time">
       {{format-duration (if hasTrack currentTrack.length 0)}}
     </div>
   </div>
   <div class="footer__center small-12 medium-3 large-2">
-    <button class="control">
-      <i class="control__icon fa fa-volume-up"></i>
-    </button>
-
-    {{mf-progress-indicator}}
+    {{mf-volume-control}}
   </div>
 </div>
