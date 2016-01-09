@@ -37,6 +37,8 @@ export default Ember.Service.extend({
 
   progressTracker: null,
 
+  loaderService: Ember.inject.service('loader-service'),
+
   init() {
     this._super.apply(this, arguments);
     this._connect();
@@ -148,13 +150,16 @@ export default Ember.Service.extend({
   },
 
 	_call(ns, func, args = undefined) {
+    this.get('loaderService').show();
 		return new Ember.RSVP.Promise((resolve, reject) => {
       this.get('mopidyCaller').then((mopidy) => {
         const mopidyFunction = mopidy[ns][func];
 
-        (args === undefined ? mopidyFunction() : mopidyFunction(args)).then(function(result) {
+        (args === undefined ? mopidyFunction() : mopidyFunction(args)).then((result) => {
+          this.get('loaderService').hide();
           resolve(result);
-        }, function (reason) {
+        }, (reason) => {
+          this.get('loaderService').hide();
           reject(reason);
         });
       });
