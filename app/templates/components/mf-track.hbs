@@ -1,12 +1,20 @@
-<div class="small-12 medium-4 track__title">
+<div class="small-12 medium-4 column track__title">
   {{track.name}}
 </div>
-<div class="small-5 medium-3 track__artist">
+<div class="small-5 medium-3 column track__artist">
   {{track.artists.firstObject.name}}
 </div>
-<div class="small-5 medium-4 track__album">
+<div class="small-5 medium-3 column track__album">
   {{track.album.name}}
 </div>
-<div class="small-2 medium-1 track__duration">
+<div class="small-1 medium-1 column track__duration">
   {{format-duration track.length}}
+</div>
+<div class="small-1 column track__context-menu">
+{{#mf-context-menu tagName="i" class="fa fa-ellipsis-h" play=(action 'play') add=(action 'add') as |component|}}
+  <ul class="context-menu__list">
+    <li class="context-menu__list-item" {{action 'handle' 'play' target=component}}>Play</li>
+    <li class="context-menu__list-item" {{action 'handle' 'add' target=component}}>Add to queue</li>
+  </ul>
+{{/mf-context-menu}}
 </div>

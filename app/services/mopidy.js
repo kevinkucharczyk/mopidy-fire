@@ -79,6 +79,17 @@ export default Ember.Service.extend({
       this.set('currentTrack', data);
     });
 
+    this._call('playback', 'getTimePosition').then((data) => {
+      this.set('currentPosition', data);
+    });
+
+    this._call('playback', 'getState').then((data) => {
+      if(data === 'playing') {
+        this.set('isPlaying', true);
+        this.get('progressTracker').start();
+      }
+    });
+
     this.getVolume().then((volume) => {
       this.set('currentVolume', volume);
     });

@@ -24,6 +24,8 @@ body {
 
   background-color: $primary;
   box-shadow: 1px 0px 1px 0px $primary;
+
+  transform: translate3d(-10em, 0, 0);
 }
 
 .sidebar__menu {
@@ -56,10 +58,18 @@ body {
 }
 
 .content {
-  margin-right: 10em;
-  transform: translate3d(10em, 0, 0);
-
   overflow: hidden;
+}
+
+@media screen and (min-width: 40em) {
+  .sidebar {
+    transform: translate3d(0, 0, 0);
+  }
+  .content {
+    margin-right: 10em;
+
+    transform: translate3d(10em, 0, 0);
+  }
 }
 
 .section-header {
@@ -162,6 +172,12 @@ body {
   color: lighten($primary, 25%);
 }
 
+.track__context-menu {
+  font-size: 22px;
+  text-align: center;
+  line-height: 22px;
+}
+
 .footer {
   position: fixed;
   left: 0;
@@ -252,9 +268,57 @@ body {
 }
 
 .volume-control {
-    display: inherit;
-    width: 100%;
-    padding: 0 20px;
-    align-items: center;
-    justify-content: center;
+  display: inherit;
+  width: 100%;
+  max-width: 15em;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.context-menu {
+  position: relative;
+}
+
+.context-menu:hover:before {
+  color: $gold;
+  transition: color 0.2s ease;
+}
+
+.context-menu__content {
+  display: none;
+
+  position: absolute;
+  left: -50px;
+  background: #fff;
+
+  font-size: 14px;
+
+  box-shadow: 0px 0px 1px 1px rgba(64,62,70,0.25);
+  cursor: default;
+  z-index: 1000;
+}
+
+.context-menu__content.open {
+  display: block;
+}
+
+.context-menu__list {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  list-style-type: none;
+  user-select: none;
+}
+
+.context-menu__list-item {
+  padding: 7px 15px;
+  white-space: nowrap;
+
+  transition: background-color 0.2s ease;
+}
+
+.context-menu__list-item:hover {
+  background-color: lighten($primary, 60%);
+  cursor: pointer;
 }
