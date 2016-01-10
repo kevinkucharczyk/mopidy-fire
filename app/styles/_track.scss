@@ -1,0 +1,49 @@
+.track {
+  padding: 10px 5px;
+  border-bottom: 1px solid $gold;
+
+  color: $primary;
+
+  font-size: 14px;
+
+  transition: background-color 0.2s ease;
+}
+
+.track.active {
+  background-color: $gold-light;
+}
+
+.track:first-child {
+  border-top: 1px solid $gold;
+}
+
+.track:hover {
+  background-color: lighten($primary, 60%);
+  cursor: pointer;
+}
+
+.track__title,
+.track__artist,
+.track__album {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track__title {
+  font-weight: 600;
+}
+
+.track__artist {
+  color: lighten($primary, 25%);
+}
+
+.track__album {
+  color: lighten($primary, 25%);
+}
+
+.track__context-menu {
+  font-size: 22px;
+  text-align: center;
+  line-height: 22px;
+}

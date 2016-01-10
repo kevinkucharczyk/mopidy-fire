@@ -1,0 +1,49 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  height: 100%;
+  width: 10em;
+
+  background-color: $primary;
+  box-shadow: 1px 0px 1px 0px $primary;
+
+  transform: translate3d(-10em, 0, 0);
+}
+
+.sidebar__menu {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+.sidebar__menu-link {
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  width: 100%;
+
+  color: $off-white;
+
+  transition: all 0.2s ease;
+}
+
+.sidebar__menu-link:hover {
+  color: $off-white;
+  background-color: lighten($primary, 25%);
+}
+
+.sidebar__menu-link:focus,
+.sidebar__menu-link.active {
+  color: #000;
+  background-color: $gold;
+}
+
+@media screen and (min-width: 40em) {
+  .sidebar {
+    transform: translate3d(0, 0, 0);
+  }
+}

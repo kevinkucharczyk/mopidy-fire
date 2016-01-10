@@ -1,0 +1,24 @@
+.control {
+  font-size: 28px;
+  color: $gold-light;
+
+  transition: color 0.2s ease;
+}
+
+.control:hover {
+  color: lighten($gold-light, 25%);
+}
+
+.control__icon {
+  margin: 10px;
+}
+
+.control__icon--volume {
+  width: 26px;
+  text-align: left;
+}
+
+.control__icon--playpause {
+  width: 24px;
+  text-align: center;
+}

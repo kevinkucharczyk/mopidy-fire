@@ -1,0 +1,26 @@
+.slider {
+  width: 100%;
+  display: inline-block;
+}
+
+.slider:hover {
+  cursor: pointer;
+}
+
+.slider__bar {
+  position: relative;
+  height: 5px;
+  width: 100%;
+  margin: 20px 0;
+  background-color: $accent;
+}
+
+.slider__bar-current {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 20%;
+
+  background-color: $gold-light;
+}
