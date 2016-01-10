@@ -24,8 +24,31 @@ export default Ember.Component.extend({
     });
   },
 
-  _open() {
+  _open(e) {
     this.set('isOpen', true);
+    let rightMargin = 10;
+    let element = this.$('.context-menu__content'),
+      content = Ember.$('.content'),
+      body = Ember.$('body');
+    let contentWidth = content.outerWidth(),
+      bodyHeight = body.outerHeight(),
+      elementWidth = element.outerWidth(),
+      elementHeight = element.outerHeight();
+    let totalWidth = e.pageX + elementWidth,
+      totalHeight = e.pageY + elementHeight,
+      left = e.pageX - rightMargin,
+      top = e.pageY;
+
+    if (totalWidth > contentWidth) {
+      left = left - (totalWidth - contentWidth);
+    }
+
+    if (totalHeight > bodyHeight) {
+      top = top - (totalHeight - bodyHeight);
+    }
+
+    element.css('top', top + 'px');
+    element.css('left', left + 'px');
     this._registerHandler();
   },
 
@@ -34,19 +57,19 @@ export default Ember.Component.extend({
     this._unregisterHandler();
   },
 
-  _toggle() {
+  _toggle(e) {
     if(this.get('isOpen')) {
       this._close();
     } else {
       Ember.$(document).trigger('mf.contextMenu:hide');
-      this._open();
+      this._open(e);
     }
   },
 
   click(e) {
     const isToggleButton = this.$().is(e.target);
     if(isToggleButton) {
-      this._toggle();
+      this._toggle(e);
     }
     return false;
   },
