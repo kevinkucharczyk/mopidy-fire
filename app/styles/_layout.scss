@@ -169,6 +169,10 @@ body {
   transition: background-color 0.2s ease;
 }
 
+.track.active {
+  background-color: $gold-light;
+}
+
 .track:first-child {
   border-top: 1px solid $gold;
 }
@@ -347,4 +351,8 @@ body {
 .context-menu__list-item:hover {
   background-color: lighten($primary, 60%);
   cursor: pointer;
+}
+
+.context-menu__separator {
+  margin: 0;
 }

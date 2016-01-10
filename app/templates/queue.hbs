@@ -1,0 +1,9 @@
+<div class="section-header">
+  Queue
+</div>
+
+<div class="section-body">
+  {{#each model as |tltrack|}}
+    {{mf-track track=tltrack.track tlid=tltrack.tlid isQueue=true}}
+  {{/each}}
+</div>

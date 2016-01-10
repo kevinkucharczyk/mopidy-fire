@@ -34,6 +34,7 @@ export default Ember.Service.extend({
   isMute: false,
   isPlaying: false,
   currentPosition: 0,
+  tracklist: null,
 
   progressTracker: null,
 
@@ -92,6 +93,10 @@ export default Ember.Service.extend({
       }
     });
 
+    this.getTracklist().then((data) => {
+      this.set('tracklist', data);
+    });
+
     this.getVolume().then((volume) => {
       this.set('currentVolume', volume);
     });
@@ -133,6 +138,12 @@ export default Ember.Service.extend({
       this.get('progressTracker').stop();
     });
 
+    mopidy.on('event:tracklistChanged', () => {
+      this.getTracklist().then((data) => {
+        this.set('tracklist', data);
+      });
+    });
+
     mopidy.on('event:seeked', (data) => {
       let timePosition = data.time_position;
       this.set('currentPosition', timePosition);
@@ -166,7 +177,7 @@ export default Ember.Service.extend({
     });
 	},
 
-  playTrack(uri) {
+  clearAndPlaySingle(uri) {
     return this.clearTracklist().then(() => {
       return this.addTrack(uri).then(() => {
         return this.play();
@@ -174,8 +185,28 @@ export default Ember.Service.extend({
     });
   },
 
+  playTrack(tlid) {
+    return this._call('playback', 'play', { tlid: tlid });
+  },
+
   addTrack(uri) {
-    return this._call('tracklist', 'add', { uris: [uri] });
+    return this.addTracks([uri]);
+  },
+
+  addTracks(uris) {
+    return this._call('tracklist', 'add', { uris: uris });
+  },
+
+  removeTrack(uri) {
+    return this.removeTracks([uri]);
+  },
+
+  removeTracks(uris) {
+    return this._call('tracklist', 'remove', { uri: uris });
+  },
+
+  getTracklist() {
+    return this._call('tracklist', 'getTlTracks');
   },
 
   clearTracklist() {

@@ -11,10 +11,14 @@
   {{format-duration track.length}}
 </div>
 <div class="small-1 column track__context-menu">
-{{#mf-context-menu tagName="i" class="fa fa-ellipsis-h" play=(action 'play') add=(action 'add') as |component|}}
+{{#mf-context-menu tagName="i" class="fa fa-ellipsis-h"
+  play=(action 'play') add=(action 'add') remove=(action 'remove')
+  as |component|}}
   <ul class="context-menu__list">
     <li class="context-menu__list-item" {{action 'handle' 'play' target=component}}>Play</li>
+    <hr class="context-menu__separator">
     <li class="context-menu__list-item" {{action 'handle' 'add' target=component}}>Add to queue</li>
+    <li class="context-menu__list-item" {{action 'handle' 'remove' target=component}}>Remove from queue</li>
   </ul>
 {{/mf-context-menu}}
 </div>

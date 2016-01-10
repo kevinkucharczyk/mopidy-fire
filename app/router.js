@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('browse');
   this.route('search');
   this.route('settings');
+  this.route('queue');
 });
 
 export default Router;
