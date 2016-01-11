@@ -35,6 +35,8 @@ export default Ember.Service.extend({
   isPlaying: false,
   currentPosition: 0,
   tracklist: null,
+  isRandom: false,
+  isRepeat: false,
 
   progressTracker: null,
 
@@ -104,6 +106,18 @@ export default Ember.Service.extend({
     this.getMute().then((state) => {
       this.set('isMute', state);
     });
+
+    this._updateOptions();
+  },
+
+  _updateOptions() {
+    this.getRandom().then((state) => {
+      this.set('isRandom', state);
+    });
+
+    this.getRepeat().then((state) => {
+      this.set('isRepeat', state);
+    });
   },
 
   _initListeners() {
@@ -161,6 +175,10 @@ export default Ember.Service.extend({
     mopidy.on('event:muteChanged', (state) => {
       let muteState = state.mute;
       this.set('isMute', muteState);
+    });
+
+    mopidy.on('event:optionsChanged', () => {
+      this._updateOptions();
     });
   },
 
@@ -256,6 +274,22 @@ export default Ember.Service.extend({
 
   getPlaylist(uri) {
     return this._call('playlists', 'lookup', { uri: uri });
+  },
+
+  getRandom() {
+    return this._call('tracklist', 'getRandom');
+  },
+
+  getRepeat() {
+    return this._call('tracklist', 'getRepeat');
+  },
+
+  setRandom(value) {
+    return this._call('tracklist', 'setRandom', { value: value });
+  },
+
+  setRepeat(value) {
+    return this._call('tracklist', 'setRepeat', { value: value });
   },
 
   getImages(uris) {

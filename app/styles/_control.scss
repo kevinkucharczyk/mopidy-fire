@@ -5,8 +5,16 @@
   transition: color 0.2s ease;
 }
 
-.control:hover {
+.control:hover, {
   color: lighten($gold-light, 25%);
+}
+
+.control.inactive {
+  color: $accent;
+}
+
+.control.inactive:hover {
+  color: lighten($accent, 25%);
 }
 
 .control__icon {

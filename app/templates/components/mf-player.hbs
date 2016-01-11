@@ -6,7 +6,7 @@
 </div>
 
 <div class="row footer__controls">
-  <div class="footer__center small-12 medium-3 large-2">
+  <div class="footer__center small-12 medium-2 large-2">
     <button class="control" {{action "previous"}}>
       <i class="control__icon fa fa-step-backward"></i>
     </button>
@@ -17,7 +17,7 @@
       <i class="control__icon fa fa-step-forward"></i>
     </button>
   </div>
-  <div class="footer__center small-12 medium-6 large-8">
+  <div class="footer__center small-12 medium-10 large-7">
     <div class="footer__time">
       {{format-duration currentProgress}}
     </div>
@@ -28,7 +28,13 @@
       {{format-duration (if hasTrack currentTrack.length 0)}}
     </div>
   </div>
-  <div class="footer__center small-12 medium-3 large-2">
+  <div class="footer__center small-12 large-3">
+    <button class="control {{unless isRandom "inactive"}}" {{action "random"}}>
+      <i class="control__icon fa fa-random"></i>
+    </button>
+    <button class="control {{unless isRepeat "inactive"}}" {{action "repeat"}}>
+      <i class="control__icon fa fa-repeat"></i>
+    </button>
     {{mf-volume-control}}
   </div>
 </div>

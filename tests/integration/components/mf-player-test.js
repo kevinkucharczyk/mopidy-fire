@@ -12,6 +12,8 @@ const mopidyMock = Ember.Service.extend({
     uri: 'testuri'
   },
   isPlaying: false,
+  isRandom: false,
+  isRepeat: false,
   currentPosition: 0
 });
 
@@ -55,3 +57,24 @@ test('should react to progress changes', function(assert) {
 
   assert.equal(this.$('.slider__bar-current')[0].style.width, '50%');
 });
+
+test('should react to shuffle state changes', function(assert) {
+  this.render(hbs`{{mf-player}}`);
+
+  assert.ok(this.$('.fa-random').parent().hasClass('inactive'));
+
+  this.set('mopidy.isRandom', true);
+
+  assert.notOk(this.$('.fa-random').parent().hasClass('inactive'));
+});
+
+test('should react to repeat state changes', function(assert) {
+  this.render(hbs`{{mf-player}}`);
+
+  assert.ok(this.$('.fa-repeat').parent().hasClass('inactive'));
+
+  this.set('mopidy.isRepeat', true);
+
+  assert.notOk(this.$('.fa-repeat').parent().hasClass('inactive'));
+});
+

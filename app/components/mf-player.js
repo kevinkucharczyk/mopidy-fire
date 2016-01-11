@@ -4,6 +4,14 @@ export default Ember.Component.extend({
   mopidy: Ember.inject.service('mopidy'),
   classNames: ['footer'],
 
+  isRandom: Ember.computed('mopidy.isRandom', function() {
+    return this.get('mopidy.isRandom');
+  }),
+
+  isRepeat: Ember.computed('mopidy.isRepeat', function() {
+    return this.get('mopidy.isRepeat');
+  }),
+
   isPlaying: Ember.computed('mopidy.isPlaying', function() {
     return this.get('mopidy.isPlaying');
   }),
@@ -42,6 +50,16 @@ export default Ember.Component.extend({
 
     next() {
       this.get('mopidy').next();
+    },
+
+    random() {
+      let isRandom = this.get('isRandom');
+      this.get('mopidy').setRandom(!isRandom);
+    },
+
+    repeat() {
+      let isRepeat = this.get('isRepeat');
+      this.get('mopidy').setRepeat(!isRepeat);
     },
 
     setProgress(position) {
