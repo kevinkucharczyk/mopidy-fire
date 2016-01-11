@@ -7,13 +7,13 @@
 
 <div class="row footer__controls">
   <div class="footer__center small-12 medium-3 large-2">
-    <button class="control">
+    <button class="control" {{action "previous"}}>
       <i class="control__icon fa fa-step-backward"></i>
     </button>
     <button class="control" {{action "togglePlayPause"}}>
       <i class="control__icon fa {{if isPlaying 'fa-pause' 'fa-play'}} control__icon--playpause"></i>
     </button>
-    <button class="control">
+    <button class="control" {{action "next"}}>
       <i class="control__icon fa fa-step-forward"></i>
     </button>
   </div>

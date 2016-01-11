@@ -36,6 +36,14 @@ export default Ember.Component.extend({
       this.get('mopidy').togglePlayPause();
     },
 
+    previous() {
+      this.get('mopidy').previous();
+    },
+
+    next() {
+      this.get('mopidy').next();
+    },
+
     setProgress(position) {
       let trackLength = this.get('currentTrack.length');
       let positionScaled = trackLength * position / 100;

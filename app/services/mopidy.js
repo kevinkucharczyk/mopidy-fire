@@ -126,8 +126,12 @@ export default Ember.Service.extend({
       this.get('progressTracker').start();
     });
 
-    mopidy.on('event:trackPlaybackPaused', () => {
+    mopidy.on('event:trackPlaybackPaused', (data) => {
+      let track = data.tl_track.track;
+      let timePosition = data.time_position;
+      this.set('currentTrack', track);
       this.set('isPlaying', false);
+      this.set('currentPosition', timePosition);
       this.get('progressTracker').stop();
     });
 
@@ -219,6 +223,14 @@ export default Ember.Service.extend({
 
   pause() {
     return this._call('playback', 'pause');
+  },
+
+  previous() {
+    return this._call('playback', 'previous');
+  },
+
+  next() {
+    return this._call('playback', 'next');
   },
 
   stop() {
