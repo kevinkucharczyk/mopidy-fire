@@ -1,23 +1,23 @@
----
 language: node_js
 node_js:
-  - "0.12"
-
+- '0.12'
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
-
+- export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+- npm config set spin false
+- npm install -g npm@^2
 install:
-  - npm install -g bower
-  - npm install
-  - bower install
-
+- npm install -g bower
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+after_success:
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash gh-pages-deploy.sh
+env:
+  global:
+  - GH_REF=github.com/kevinkucharczyk/mopidy-fire.git
+  - secure: MaD29uM0EcqpBUGAUyOtTt+8f/RpaWrvOwjav1NiB96R+NnNKfmoj14oe9j21KeUySAmjF0x9Jt/ynnznbFtTuv9hb9M6G6riqCu7Jb/WkwvluGnUELkLmWkEAnjx3BIEnnbk9Vughp+kAEnfw3kx0d5BjNUlgIJMfr+QIPVROyWYM/B1Xiqvac0t0Bt2FeOYOvErGYjXe/yoP/rQPQLY+K5wFZGeXRnBqcOxxQ3iPvR0WfkjrCbuR5sFiyzcTw5BbcvgX8a97DGoXkQveLbBIYgL7I3fTaHKeYq0CUNIhn9uyvJN8phiBWRC99f/uaHHoIA5QnOIyuZ9mLdvXLcWCVwNOiyDuIxIcp5vEcO2ObU235sNTFttq7w9dnHQk328mHEjtPVyGR/AXkjlqq69VM5oZc/qTL8vpUWiH0z7tfbIAQJB4TzSeTrlOaFPmE7aAHGuOq7snc9xgm3Ao30tJLynDm66gMRkmlHm44oKgOBPT+xW2zEjJQxI+g/BtO6obiHYVjNivs2O04O4rVbKO0gi9kknLH2YyWQp+cxzhi5PjTbtdUd35AcaZbGTSvs7RHLRSOgWtMS1q0Ic8Ok9AkaL3wQuUJpJ+Y9c7ZKsZv5uUOQy4UiccV/oMKDC5+0rOxJBuotYRbcvCw5i8kSIC/w9GV8NvTfjDhztGk682A=
