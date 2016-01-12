@@ -25,5 +25,10 @@ export default Ember.Service.extend({
     let prefixedKey = this._getPrefixedKey(key);
     let serializedValue = this._serialize(value);
     localStorage.setItem(prefixedKey, serializedValue);
+  },
+
+  removeItem(key) {
+    let prefixedKey = this._getPrefixedKey(key);
+    localStorage.removeItem(prefixedKey);
   }
 });

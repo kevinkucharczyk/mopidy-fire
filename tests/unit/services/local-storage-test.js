@@ -26,3 +26,17 @@ test('should read object from local storage', function(assert) {
 
   assert.deepEqual(storedValue, testObject);
 });
+
+test('should clear object from local storage', function(assert) {
+  let service = this.subject();
+
+  let testObject = { name: 'John Doe' };
+
+  window.localStorage.setItem('mopidyFire.settings', JSON.stringify(testObject));
+
+  service.removeItem('settings');
+
+  let storedValue = window.localStorage.getItem('mopidyFire.settings');
+
+  assert.equal(storedValue, undefined);
+});

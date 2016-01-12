@@ -1,4 +1,3 @@
-import config from '../config/environment';
 import Ember from 'ember';
 
 const Timer = Ember.Object.extend({
@@ -41,6 +40,7 @@ export default Ember.Service.extend({
   progressTracker: null,
 
   loaderService: Ember.inject.service('loader-service'),
+  localStorage: Ember.inject.service('local-storage'),
 
   init() {
     this._super.apply(this, arguments);
@@ -58,10 +58,25 @@ export default Ember.Service.extend({
     this.set('progressTracker', progressTracker);
   },
 
+  _getMopidyUrl() {
+    const settings = this.get('localStorage').getItem('settings');
+    if(settings === undefined ||
+    settings === null ||
+    settings === {} ||
+    settings['url'] === undefined ||
+    settings['url'] === null) {
+      return 'localhost:6680';
+    } else {
+      return settings['url'];
+    }
+  },
+
 	_connect() {
+    const mopidyUrl = this._getMopidyUrl();
 		const options = {
 			callingConvention: 'by-position-or-by-name',
-			webSocketUrl: 'ws://' + config.mopidyURL + ':' + config.mopidyPort + '/mopidy/ws'
+			// webSocketUrl: 'ws://' + config.mopidyURL + ':' + config.mopidyPort + '/mopidy/ws'
+      webSocketUrl: 'ws://' + mopidyUrl + '/mopidy/ws'
 		};
 		const mopidy = new Mopidy(options);
 		const mopidyCaller = new Ember.RSVP.Promise((resolve) => {
