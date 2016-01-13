@@ -1,0 +1,9 @@
+.button {
+  background: $primary;
+}
+
+.button:hover,
+.button:focus {
+    background: darken($primary, 20%);
+    color: #fff;
+}

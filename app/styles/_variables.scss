@@ -6,3 +6,9 @@ $accent: #8E897E;
 $off-white: #F8F8FF;
 
 $grid-row-width: 100%;
+
+// $input-border: 1px solid $medium-gray !default;
+$input-border-focus: 1px solid $gold !default;
+
+$input-shadow: none;
+$input-shadow-focus: 0 0 5px $gold !default;

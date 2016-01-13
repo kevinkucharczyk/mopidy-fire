@@ -71,28 +71,58 @@ export default Ember.Service.extend({
     }
   },
 
+  open() {
+    this._connect();
+  },
+
+  close() {
+    this._disconnect();
+  },
+
+  reopen() {
+    this._reopen();
+  },
+
 	_connect() {
     const mopidyUrl = this._getMopidyUrl();
 		const options = {
+      autoConnect: false,
 			callingConvention: 'by-position-or-by-name',
-			// webSocketUrl: 'ws://' + config.mopidyURL + ':' + config.mopidyPort + '/mopidy/ws'
       webSocketUrl: 'ws://' + mopidyUrl + '/mopidy/ws'
 		};
-		const mopidy = new Mopidy(options);
-		const mopidyCaller = new Ember.RSVP.Promise((resolve) => {
+    const mopidy = new Mopidy(options);
+
+    mopidy.connect();
+    const mopidyCaller = new Ember.RSVP.Promise((resolve, reject) => {
       mopidy.on((event) => {
         if (event === "state:online") {
           window.mopidy = mopidy; // attach mopidy to window for debugging purposes
           this._initPlayer();
           this._initListeners();
           resolve(mopidy);
+        } else if (event === 'websocket:error') {
+          this.get('loaderService').hide();
+          this._disconnect();
+          reject();
         }
       });
     });
 
-		this.set('mopidy', mopidy);
+    this.set('mopidy', mopidy);
     this.set('mopidyCaller', mopidyCaller);
 	},
+
+  _disconnect() {
+    let mopidy = this.get('mopidy');
+
+    mopidy.close();
+    mopidy.off();
+  },
+
+  _reopen() {
+    this._disconnect();
+    this._connect();
+  },
 
   _initPlayer() {
     this._call('playback', 'getCurrentTrack').then((data) => {
@@ -210,6 +240,8 @@ export default Ember.Service.extend({
           this.get('loaderService').hide();
           reject(reason);
         });
+      }).catch(() => {
+          reject();
       });
     });
 	},
