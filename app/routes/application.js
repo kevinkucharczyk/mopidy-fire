@@ -9,6 +9,11 @@ export default Ember.Route.extend({
       transition.promise.finally(() => {
         this.get('loaderService').hide();
       });
+    },
+
+    error() {
+      this.get('loaderService').hide();
+      return this.transitionTo('error');
     }
   }
 });
