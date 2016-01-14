@@ -1,6 +1,8 @@
 # Mopidy-fire [![Build Status](https://travis-ci.org/kevinkucharczyk/mopidy-fire.svg)](https://travis-ci.org/kevinkucharczyk/mopidy-fire)
 
-![Mopidy Fire Screenshot](http://i.imgur.com/aPotGMb.png)
+![Mopidy Mockup 1](http://i.imgur.com/waKSnrd.png)
+
+![Mopidy Mockup 2](http://i.imgur.com/JlOGfg4.png)
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
