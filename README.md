@@ -4,8 +4,9 @@
 
 ![Mopidy Mockup 2](http://i.imgur.com/JlOGfg4.png)
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Mopidy Fire is an Ember.js based client for the popular Mopidy music player. It's aimed at consuming Spotify tracks.
+
+This is currently a work in progress and may contain many bugs. Features are still being developed.
 
 ## Prerequisites
 
