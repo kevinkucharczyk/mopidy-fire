@@ -11,8 +11,9 @@ export default Ember.Route.extend({
       });
     },
 
-    error() {
+    error(error) {
       this.get('loaderService').hide();
+      this.controllerFor('error').set('error', error);
       return this.transitionTo('error');
     }
   }

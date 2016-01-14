@@ -36,6 +36,7 @@ export default Ember.Service.extend({
   tracklist: null,
   isRandom: false,
   isRepeat: false,
+  isConnected: false,
 
   progressTracker: null,
 
@@ -94,16 +95,23 @@ export default Ember.Service.extend({
 
     mopidy.connect();
     const mopidyCaller = new Ember.RSVP.Promise((resolve, reject) => {
-      mopidy.on((event) => {
+      mopidy.on((event, err) => {
         if (event === "state:online") {
           window.mopidy = mopidy; // attach mopidy to window for debugging purposes
           this._initPlayer();
           this._initListeners();
+          this.set('isConnected', true);
           resolve(mopidy);
-        } else if (event === 'websocket:error') {
+        }
+        if (event === 'websocket:error') {
           this.get('loaderService').hide();
           this._disconnect();
-          reject();
+          this.set('isConnected', false);
+          reject({
+            event: err,
+            name: 'ConnectionError',
+            message: 'Could not connect to Mopidy'
+          });
         }
       });
     });
@@ -236,12 +244,11 @@ export default Ember.Service.extend({
         (args === undefined ? mopidyFunction() : mopidyFunction(args)).then((result) => {
           this.get('loaderService').hide();
           resolve(result);
-        }, (reason) => {
-          this.get('loaderService').hide();
+        }).catch((reason) => {
           reject(reason);
-        });
-      }).catch(() => {
-          reject();
+      });
+      }).catch((reason) => {
+        reject(reason);
       });
     });
 	},

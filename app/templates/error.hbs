@@ -1,3 +1,8 @@
 <div class="row section-body">
-  Mopidy Fire encountered an error.
+  <div class="column">
+    <p>Mopidy Fire encountered an error.</p>
+    {{#if error}}
+      <p>{{error.name}}: {{error.message}}</p>
+    {{/if}}
+  </div>
 </div>
