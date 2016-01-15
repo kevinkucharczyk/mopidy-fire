@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('settings');
   this.route('queue');
   this.route('error');
+  this.route('artist', { path: '/artist/:uri' });
 });
 
 export default Router;

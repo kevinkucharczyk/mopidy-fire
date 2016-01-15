@@ -31,6 +31,7 @@ module.exports = function(defaults) {
   app.import('bower_components/mopidy.js/dist/mopidy.js');
   app.import('bower_components/moment/moment.js');
   app.import('bower_components/moment-duration-format/lib/moment-duration-format.js');
+  app.import('bower_components/lodash/lodash.js');
   app.import('bower_components/font-awesome/fonts/fontawesome-webfont.eot', {
     destDir: 'fonts'
   });
@@ -46,6 +47,6 @@ module.exports = function(defaults) {
   app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff2', {
     destDir: 'fonts'
   });
-  
+
   return app.toTree();
 };

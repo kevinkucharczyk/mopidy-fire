@@ -2,7 +2,9 @@
   {{track.name}}
 </div>
 <div class="small-5 medium-3 column track__artist">
-  {{track.artists.firstObject.name}}
+  {{#link-to "artist" track.artists.firstObject.uri}}
+    {{track.artists.firstObject.name}}
+  {{/link-to}}
 </div>
 <div class="small-5 medium-3 column track__album">
   {{track.album.name}}

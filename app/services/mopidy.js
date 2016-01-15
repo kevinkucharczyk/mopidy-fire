@@ -330,6 +330,10 @@ export default Ember.Service.extend({
     return this._call('playlists', 'lookup', { uri: uri });
   },
 
+  _lookup(uri) {
+    return this._call('library', 'lookup', { uri: uri });
+  },
+
   getRandom() {
     return this._call('tracklist', 'getRandom');
   },
@@ -369,5 +373,63 @@ export default Ember.Service.extend({
   toggleMute() {
     let muteState = this.get('isMute');
     return this.setMute(!muteState);
+  },
+
+  getArtist(uri) {
+    return this._lookup(uri).then((data) => {
+      let albums = [],
+        singles = [],
+        appearsOn = [];
+      _.remove(data, function(track) {
+        return track.name.indexOf('[unplayable]') > -1;
+      });
+
+      let artist = _.chain(data)
+        .map(function(track) {
+          return track.artists[0];
+        })
+        .find({ uri: uri })
+        .value();
+
+      let allAlbums = _.chain(data)
+        .map(function(track) {
+          return track.album;
+        })
+        .uniqBy(function(album) {
+          return album.uri;
+        })
+        .sortBy('date')
+        .value();
+
+      let tracksByAlbum = _.groupBy(data, function(track) {
+        return track.album.uri;
+      });
+
+      _.forEachRight(allAlbums, (album) => {
+        let tracks = tracksByAlbum[album.uri];
+        let albumObject = { album: album, tracks: tracks };
+
+        if (album.artists[0].uri === uri) { // check if main artist or 3rd party album
+          if (tracks.length > 4) { // full album or single
+            albums.push(albumObject);
+          }
+          else {
+            singles.push(albumObject);
+          }
+        }
+        else {
+          appearsOn.push(albumObject);
+        }
+      });
+
+      let model = {
+        artist: artist,
+        albums: albums,
+        singles: singles,
+        appearsOn: appearsOn
+      };
+
+      return model;
+    });
   }
 });

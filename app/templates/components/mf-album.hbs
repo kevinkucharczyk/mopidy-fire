@@ -1,0 +1,9 @@
+<div class="small-12 column">
+  {{album.name}}
+</div>
+
+<div class="small-12 column">
+  {{#each tracks as |track|}}
+    {{mf-track track=track}}
+  {{/each}}
+</div>

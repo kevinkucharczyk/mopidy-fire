@@ -31,8 +31,10 @@ export default Ember.Component.extend({
     this.get('mopidy').removeTrack(track.uri);
   },
 
-  click() {
-    this._playTrack();
+  click(e) {
+    if(!Ember.$(e.target).is('a')) {
+      this._playTrack();
+    }
   },
 
   actions: {
