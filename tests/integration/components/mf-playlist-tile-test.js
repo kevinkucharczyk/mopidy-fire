@@ -1,25 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-
-const mopidyMock = Ember.Service.extend({
-  getImages(args) {
-    return new Ember.RSVP.Promise(function(resolve) {
-      let response = {};
-      response[args] = [
-        {
-          uri: 'testimage1'
-        },
-        {
-          uri: 'testimage2'
-        },
-        {
-          uri: 'testimage3'
-        }];
-      resolve(response);
-    });
-  }
-});
 
 const longPlaylist = {
   name: 'Test Playlist 1',
@@ -33,6 +13,17 @@ const longPlaylist = {
       name: 'Test Track 2',
       uri: 'testtrack2'
     }
+  ],
+  images: [
+    {
+      uri: 'testimage1'
+    },
+    {
+      uri: 'testimage2'
+    },
+    {
+      uri: 'testimage3'
+    }
   ]
 };
 
@@ -44,9 +35,20 @@ const shortPlaylist = {
       name: 'Test Track 1',
       uri: 'testtrack1'
     }
+  ],
+  images: [
+    {
+      uri: 'testimage1'
+    },
+    {
+      uri: 'testimage2'
+    },
+    {
+      uri: 'testimage3'
+    }
   ]
 };
-  
+
 const noPlaylist = {
   name: 'Test Playlist 1',
   uri: 'testplaylist1',
@@ -54,17 +56,12 @@ const noPlaylist = {
 };
 
 moduleForComponent('mf-playlist-tile', 'Integration | Component | mf playlist tile', {
-  integration: true,
-  
-  beforeEach: function() {
-    this.container.registry.register('service:mopidy', mopidyMock);
-    this.container.registry.injection('component', 'mopidy', 'service:mopidy');
-  }
+  integration: true
 });
 
 test('should show playlist title', function(assert) {
   this.set('playlist', longPlaylist);
-    
+
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
 
   assert.equal(this.$('.playlist-tile__title').text().trim(), 'Test Playlist 1');
@@ -94,7 +91,7 @@ test('should show playlist track count 0', function(assert) {
 test('should show playlist medium image', function(assert) {
   this.set('playlist', longPlaylist);
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
-  
+
   assert.equal(this.$('.playlist-tile__cover').attr('src'), 'testimage2');
 });
 

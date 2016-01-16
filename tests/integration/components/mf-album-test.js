@@ -1,16 +1,58 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
-moduleForComponent('mf-album', 'Integration | Component | mf album', {
-  integration: true
+const mopidyMock = Ember.Service.extend({
+  getImages(args) {
+    return new Ember.RSVP.Promise(function(resolve) {
+      let response = {};
+      response[args] = [
+        {
+          uri: 'testimage1'
+        },
+        {
+          uri: 'testimage2'
+        },
+        {
+          uri: 'testimage3'
+        }];
+      resolve(response);
+    });
+  }
 });
 
-test('it renders', function(assert) {
+const mockAlbum = {
+  name: 'Test Album 1',
+  uri: 'testalbum1',
+  tracks: [
+    {
+      name: 'Test Track 1',
+      uri: 'testtrack1'
+    }
+  ]
+};
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
+moduleForComponent('mf-album', 'Integration | Component | mf album', {
+  integration: true,
 
-  this.render(hbs`{{mf-album}}`);
+  beforeEach: function() {
+    this.container.registry.register('service:mopidy', mopidyMock);
+    this.container.registry.injection('component', 'mopidy', 'service:mopidy');
+  }
+});
 
-  assert.equal(this.$().text().trim(), '');
+test('should show image', function(assert) {
+  this.set('album', mockAlbum);
+
+  this.render(hbs`{{mf-album album=album tracks=album.tracks}}`);
+
+  assert.equal(this.$('img').attr('src'), 'testimage3');
+});
+
+test('should show 1 track', function(assert) {
+  this.set('album', mockAlbum);
+
+  this.render(hbs`{{mf-album album=album tracks=album.tracks}}`);
+
+  assert.equal(this.$('div').last().children().length, 1);
 });

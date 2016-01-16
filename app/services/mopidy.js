@@ -323,7 +323,23 @@ export default Ember.Service.extend({
   },
 
   getPlaylists() {
-    return this._call('playlists', 'getPlaylists');
+    return this._call('playlists', 'getPlaylists').then((data) => {
+      let promiseArray = [];
+
+      _.forEach(data, (item) => {
+        let tracks = item['tracks'];
+        if(tracks && tracks.length > 0) {
+          let uri = tracks[0]['uri'];
+          let result = this.getImages([uri]).then((response) => {
+            item['images'] = response[uri];
+            return item;
+          });
+          promiseArray.push(result);
+        }
+      });
+
+      return Ember.RSVP.all(promiseArray);
+    });
   },
 
   getPlaylist(uri) {

@@ -86,7 +86,7 @@ export default Ember.Route.extend({
         albums: extractedAlbums.albums,
         singles: extractedAlbums.singles,
         appearsOn: extractedAlbums.appearsOn
-      }
+      };
     });
   }
 });
