@@ -4,10 +4,9 @@ export default Ember.Route.extend({
   model(params) {
     return this.get('mopidy').getPlaylist(params.uri);
   },
-  
+
   afterModel(model) {
     let tracks = model['tracks'];
-    
     if(tracks === undefined || tracks.length === 0) {
       this.controller.set('image', null);
     } else {
