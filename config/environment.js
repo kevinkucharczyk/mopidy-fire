@@ -50,7 +50,12 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    // ENV.baseURL = '/mopidy-fire';
+  }
+
+  if (environment === 'ghpages') {
     ENV.baseURL = '/mopidy-fire';
+    ENV.locationType = 'hash';
   }
 
   return ENV;
