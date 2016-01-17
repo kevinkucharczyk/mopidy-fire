@@ -1,10 +1,15 @@
-<div class="section-header">
-  <img src={{image}} class="section-header__cover" />
+{{#ember-wormhole to="header-content"}}
   {{model.name}}
+{{/ember-wormhole}}
+
+<div class="section-header__cover">
+  <img src={{image}} class="section-header__cover-image" />
 </div>
 
 <div class="section-body">
-  {{#each model.tracks as |track|}}
-    {{mf-track track=track}}
-  {{/each}}
+  <div>
+    {{#each model.tracks as |track|}}
+      {{mf-track track=track}}
+    {{/each}}
+  </div>
 </div>

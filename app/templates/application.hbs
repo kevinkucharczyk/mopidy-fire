@@ -1,19 +1,31 @@
-<div class="loader">
-  <img src="assets/images/loading.gif" class="loader__image">
-</div>
+<header class="header">
+  <button class="header__menu-toggle" {{action 'toggleMenu'}}>
+    <i class="fa fa-bars"></i>
+    MENU
+  </button>
+  <div id="header-content" class="header__content">
 
-<div class="sidebar">
-  <ul class="sidebar__menu">
-    <li class="sidebar__menu-item">{{link-to "Queue" "queue" class="sidebar__menu-link"}}</li>
-    <li class="sidebar__menu-item">{{link-to "Playlists" "playlists" class="sidebar__menu-link"}}</li>
-    <li class="sidebar__menu-item">{{link-to "Browse" "browse" class="sidebar__menu-link"}}</li>
-    <li class="sidebar__menu-item">{{link-to "Search" "search" class="sidebar__menu-link"}}</li>
-    <li class="sidebar__menu-item">{{link-to "Settings" "settings" class="sidebar__menu-link"}}</li>
-  </ul>
-</div>
+  </div>
+</header>
 
-<div class="content">
-  {{outlet}}
+<div class="body">
+  <div class="loader">
+    <img src="assets/images/loading.gif" class="loader__image">
+  </div>
+
+  <div class="sidebar open">
+    <ul class="sidebar__menu">
+      <li class="sidebar__menu-item">{{link-to "Queue" "queue" class="sidebar__menu-link"}}</li>
+      <li class="sidebar__menu-item">{{link-to "Playlists" "playlists" class="sidebar__menu-link"}}</li>
+      <li class="sidebar__menu-item">{{link-to "Browse" "browse" class="sidebar__menu-link"}}</li>
+      <li class="sidebar__menu-item">{{link-to "Search" "search" class="sidebar__menu-link"}}</li>
+      <li class="sidebar__menu-item">{{link-to "Settings" "settings" class="sidebar__menu-link"}}</li>
+    </ul>
+  </div>
+
+  <div class="content partial">
+    {{outlet}}
+  </div>
 </div>
 
 {{mf-player}}

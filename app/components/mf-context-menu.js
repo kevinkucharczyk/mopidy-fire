@@ -38,9 +38,10 @@ export default Ember.Component.extend({
       elementHeight = element.outerHeight(),
       footerHeight = footer.outerHeight(),
       scrollTop = doc.scrollTop(),
-      contentOffset = content.offset() ? content.offset().left : 0;
-    let pageX = e.pageX - contentOffset,
-      pageY = e.pageY;
+      contentOffsetLeft = content.offset() ? content.offset().left : 0,
+      contentOffsetTop = content.offset() ? content.offset().top : 0;
+    let pageX = e.pageX - contentOffsetLeft,
+      pageY = e.pageY - contentOffsetTop;
     let totalWidth = pageX + elementWidth,
       totalHeight = pageY + elementHeight,
       left = pageX - rightMargin,

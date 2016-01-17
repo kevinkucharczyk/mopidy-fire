@@ -2,6 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  padding-top: $top-padding;
   z-index: 100;
 
   height: 100%;
@@ -9,7 +10,13 @@
 
   background-color: $primary;
   box-shadow: 1px 0px 1px 0px $primary;
+}
 
+.sidebar.open {
+  transform: translate3d(0, 0, 0);
+}
+
+.sidebar.close {
   transform: translate3d(-10em, 0, 0);
 }
 
@@ -40,10 +47,4 @@
 .sidebar__menu-link.active {
   color: #000;
   background-color: $gold;
-}
-
-@media screen and (min-width: 40em) {
-  .sidebar {
-    transform: translate3d(0, 0, 0);
-  }
 }

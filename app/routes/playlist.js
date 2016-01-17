@@ -13,7 +13,7 @@ export default Ember.Route.extend({
       let uri = tracks.get('firstObject.uri');
       this.get('mopidy').getImages([uri]).then((response) => {
         let images = response[uri];
-        this.controller.set('image', images[2]['uri']);
+        this.controller.set('image', images[0]['uri']);
       });
     }
   }
