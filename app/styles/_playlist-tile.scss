@@ -11,9 +11,13 @@
 }
 
 .playlist-tile__cover {
+  position: relative;
   width: 100%;
+}
 
-  transition: transform 0.25s ease;
+.playlist-tile__cover-image {
+  transition: opacity 0.25s ease;
+  backface-visibility: hidden;
 }
 
 .playlist-tile__title {
@@ -21,13 +25,24 @@
   line-height: 1.4;
 }
 
+.playlist-tile__context-menu {
+  padding: 0 5px;
+  width: 100%;
+
+  background-color: darken($primary, 10%);
+  color: #fff;
+  font-size: 22px;
+  text-align: right;
+  line-height: 22px;
+}
+
 .playlist-tile__subtitle {
   color: lighten($primary, 25%);
 }
 
 .playlist-tile:hover {
-  .playlist-tile__cover {
-    transform: scale(0.95);
+  .playlist-tile__cover-image {
+    opacity: 0.75;
   }
 
   .playlist-tile__title {

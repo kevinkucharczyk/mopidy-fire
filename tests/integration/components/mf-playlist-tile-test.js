@@ -92,6 +92,6 @@ test('should show playlist medium image', function(assert) {
   this.set('playlist', longPlaylist);
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
 
-  assert.equal(this.$('.playlist-tile__cover').attr('src'), 'testimage2');
+  assert.equal(this.$('.playlist-tile__cover-image').attr('src'), 'testimage2');
 });
 

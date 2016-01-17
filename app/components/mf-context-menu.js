@@ -29,22 +29,29 @@ export default Ember.Component.extend({
     let rightMargin = 10;
     let element = this.$('.context-menu__content'),
       content = Ember.$('.content'),
-      body = Ember.$('body');
+      body = Ember.$('body'),
+      doc = Ember.$(document),
+      footer = Ember.$('.footer');
     let contentWidth = content.outerWidth(),
       bodyHeight = body.outerHeight(),
       elementWidth = element.outerWidth(),
-      elementHeight = element.outerHeight();
-    let totalWidth = e.pageX + elementWidth,
-      totalHeight = e.pageY + elementHeight,
-      left = e.pageX - rightMargin,
-      top = e.pageY;
+      elementHeight = element.outerHeight(),
+      footerHeight = footer.outerHeight(),
+      scrollTop = doc.scrollTop(),
+      contentOffset = content.offset() ? content.offset().left : 0;
+    let pageX = e.pageX - contentOffset,
+      pageY = e.pageY;
+    let totalWidth = pageX + elementWidth,
+      totalHeight = pageY + elementHeight,
+      left = pageX - rightMargin,
+      top = pageY;
 
     if (totalWidth > contentWidth) {
       left = left - (totalWidth - contentWidth);
     }
 
-    if (totalHeight > bodyHeight) {
-      top = top - (totalHeight - bodyHeight);
+    if (totalHeight - scrollTop + footerHeight > bodyHeight) {
+      top = top - (elementHeight);
     }
 
     element.css('top', top + 'px');

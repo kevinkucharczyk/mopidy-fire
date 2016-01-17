@@ -7,14 +7,15 @@
   display: none;
 
   position: absolute;
-  // left: -50px;
+
+  color: $primary;
   background: #fff;
 
   font-size: 14px;
 
   box-shadow: 0px 0px 1px 1px rgba(64,62,70,0.25);
   cursor: default;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .context-menu__content.open {
