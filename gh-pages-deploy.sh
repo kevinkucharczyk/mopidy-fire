@@ -7,8 +7,8 @@ cd dist
 
 git init
 
-git config user.name "Kevin P. Kucharczyk"
-git config user.email "kevinkucharczyk@gmail.com"
+git config user.name "Travis CI Build (kevinkucharczyk)"
+git config user.email "kevinkucharczyk+travisci@gmail.com"
 
 git add .
 git commit -m "Deploy to GitHub Pages"
