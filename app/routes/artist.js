@@ -81,12 +81,16 @@ export default Ember.Route.extend({
 
       const extractedAlbums = this._extractAlbums(data, uri);
 
-      return {
-        artist: artist,
-        albums: extractedAlbums.albums,
-        singles: extractedAlbums.singles,
-        appearsOn: extractedAlbums.appearsOn
-      };
+      return this.get('mopidy').getImages([artist.uri]).then((data) => {
+        artist['images'] = data[artist.uri];
+
+        return {
+          artist: artist,
+          albums: extractedAlbums.albums,
+          singles: extractedAlbums.singles,
+          appearsOn: extractedAlbums.appearsOn
+        };
+      });
     });
   }
 });

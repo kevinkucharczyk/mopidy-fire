@@ -2,6 +2,13 @@
   {{model.artist.name}}
 {{/ember-wormhole}}
 
+<div class="section-header__cover">
+  <img src={{model.artist.images.0.uri}} class="section-header__cover-image" />
+  <div class="section-header__cover-overlay">
+    {{model.artist.name}}
+  </div>
+</div>
+
 <div class="section-body">
   {{#each model.albums as |album|}}
     {{mf-album album=album.album tracks=album.tracks}}
