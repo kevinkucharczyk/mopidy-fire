@@ -17,6 +17,7 @@ body {
 }
 
 .header {
+  display: flex;
   padding: 0 10px;
   position: fixed;
   top: 0;
@@ -26,6 +27,7 @@ body {
   z-index: 1000;
 
   text-align: center;
+  line-height: $top-padding;
 
   color: $off-white;
   background-color: $primary;
@@ -40,15 +42,19 @@ body {
 }
 
 .header__menu-toggle {
-  float: left;
-  margin-right: 10px;
+  margin-right: auto;
   line-height: $top-padding;
-
+  white-space: nowrap;
   transition: color 0.2s ease;
 }
 
 .header__menu-toggle:hover {
   color: $gold;
+}
+
+.header__connection {
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .body {

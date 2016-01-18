@@ -6,6 +6,14 @@
   <div id="header-content" class="header__content">
 
   </div>
+
+  <div class="header__connection">
+    {{#if mopidy.isConnected}}
+      Connected
+    {{else}}
+      Not connected
+    {{/if}}
+  </div>
 </header>
 
 <div class="body">
