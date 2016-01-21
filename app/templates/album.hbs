@@ -1,18 +1,19 @@
 {{#ember-wormhole to="header-content"}}
-  {{model.album.name}}
+  {{model.album.name}} ({{model.album.date}})
 {{/ember-wormhole}}
 
 <div class="section-header__cover">
   <img src={{model.album.images.0.uri}} class="section-header__cover-image" />
   <div class="section-header__cover-overlay">
-    {{model.album.name}}
+    {{model.album.name}} ({{model.album.date}})
+    <div class="section-header__cover-artist">
+      {{model.album.artists.0.name}}
+    </div>
   </div>
 </div>
 
 <div class="section-body">
-  <div>
-    {{#each model.tracks as |track|}}
-      {{mf-track track=track}}
-    {{/each}}
-  </div>
+  {{#each model.tracks as |track|}}
+    {{mf-track track=track}}
+  {{/each}}
 </div>
