@@ -2,12 +2,14 @@
   {{track.name}}
 </div>
 <div class="small-5 medium-3 column track__artist">
-  {{#link-to "artist" track.artists.firstObject.uri}}
+  {{#link-to "artist" track.artists.firstObject.uri title=track.artists.firstObject.name}}
     {{track.artists.firstObject.name}}
   {{/link-to}}
 </div>
 <div class="small-5 medium-3 column track__album">
-  {{track.album.name}}
+  {{#link-to "album" track.album.uri title=track.album.name}}
+    {{track.album.name}}
+  {{/link-to}}
 </div>
 <div class="small-1 medium-1 column track__duration">
   {{format-duration track.length}}

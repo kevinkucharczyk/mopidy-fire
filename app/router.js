@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('queue');
   this.route('error');
   this.route('artist', { path: '/artist/:uri' });
+  this.route('album', { path: '/album/:uri' });
 });
 
 export default Router;

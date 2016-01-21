@@ -1,0 +1,18 @@
+{{#ember-wormhole to="header-content"}}
+  {{model.album.name}}
+{{/ember-wormhole}}
+
+<div class="section-header__cover">
+  <img src={{model.album.images.0.uri}} class="section-header__cover-image" />
+  <div class="section-header__cover-overlay">
+    {{model.album.name}}
+  </div>
+</div>
+
+<div class="section-body">
+  <div>
+    {{#each model.tracks as |track|}}
+      {{mf-track track=track}}
+    {{/each}}
+  </div>
+</div>

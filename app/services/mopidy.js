@@ -346,6 +346,20 @@ export default Ember.Service.extend({
     return this._call('playlists', 'lookup', { uri: uri });
   },
 
+  getAlbum(uri) {
+    return this.lookup(uri).then((data) => {
+      let albumObject = {};
+
+      albumObject['album'] = data[0]['album'];
+      albumObject['tracks'] = data;
+
+      return this.getImages([uri]).then((response) => {
+        albumObject['album']['images'] = response[uri];
+        return albumObject;
+      });
+    });
+  },
+
   lookup(uri) {
     return this._call('library', 'lookup', { uri: uri });
   },
