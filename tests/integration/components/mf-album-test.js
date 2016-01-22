@@ -56,3 +56,11 @@ test('should show 1 track', function(assert) {
 
   assert.equal(this.$('div').last().children().length, 1);
 });
+
+test('should only show album cover row in listView mode', function(assert) {
+  this.set('album', mockAlbum);
+
+  this.render(hbs`{{mf-album album=album tracks=album.tracks listView=true}}`);
+
+  assert.equal(this.$('div').first().siblings().length, 0);
+});

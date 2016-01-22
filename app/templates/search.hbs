@@ -1,7 +1,7 @@
 <div class="section-body">
 
   <div class="input-group">
-    {{mf-input class="input-group-field" value=query onInput="onInput" onSubmit="onSubmit" update=(action (mut query))}}
+    {{mf-input class="input-group-field" value=(readonly query) onInput="onInput" onSubmit="onSubmit" update=(action (mut query))}}
     <div class="input-group-button">
       <input type="submit" class="button" value="Search">
     </div>

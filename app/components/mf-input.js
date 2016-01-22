@@ -6,8 +6,14 @@ export default Ember.Component.extend({
   attributeBindings: [ 'type', 'value', 'placeholder', 'data-stripe', 'name' ],
   _sanitizedValue: undefined,
 
-  input() { this._handleChangeEvent(); },
-  change() { this._handleChangeEvent(); },
+  input() {
+    this._handleChangeEvent();
+  },
+
+  change() {
+    this._handleChangeEvent();
+  },
+
   keyPress(event) {
     if (event.which === 13 || event.keyCode === 13) {
       this.sendAction('onSubmit');
