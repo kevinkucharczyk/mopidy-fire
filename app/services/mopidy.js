@@ -403,5 +403,9 @@ export default Ember.Service.extend({
   toggleMute() {
     let muteState = this.get('isMute');
     return this.setMute(!muteState);
+  },
+
+  search(query) {
+    return this._call('library', 'search', { any: [query]});
   }
 });

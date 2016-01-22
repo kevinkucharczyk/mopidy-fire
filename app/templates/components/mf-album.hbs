@@ -1,6 +1,6 @@
 <div class="album__cover">
   <img src={{images.2.uri}}>
-  {{album.name}} ({{album.date}})
+  {{album.name}} ({{#if listView}}{{album.artists.0.name}} {{/if}}{{album.date}})
   {{#mf-context-menu tagName="i" class="fa fa-ellipsis-h album__context-menu"
     play=(action 'play') add=(action 'add')
     as |component|}}
@@ -12,6 +12,8 @@
   {{/mf-context-menu}}
 </div>
 
-{{#each tracks as |track|}}
-  {{mf-track track=track}}
-{{/each}}
+{{#unless listView}}
+  {{#each tracks as |track|}}
+    {{mf-track track=track}}
+  {{/each}}
+{{/unless}}

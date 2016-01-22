@@ -1,1 +1,42 @@
-{{outlet}}
+<div class="section-body">
+
+  <div class="input-group">
+    {{mf-input class="input-group-field" value=query onInput="onInput" onSubmit="onSubmit" update=(action (mut query))}}
+    <div class="input-group-button">
+      <input type="submit" class="button" value="Search">
+    </div>
+  </div>
+
+  {{#if model}}
+    <div class="search-results">
+      {{#if model.firstObject.artists}}
+        <div class="search-results__container">
+          <h3 class="search-results__header">Artists</h3>
+          <ul>
+            {{#each model.firstObject.artists as |artist|}}
+              <li>{{artist.name}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
+
+      {{#if model.firstObject.albums}}
+        <div class="search-results__container">
+          <h3 class="search-results__header">Albums</h3>
+          {{#each model.firstObject.albums as |album|}}
+            {{mf-album album=album listView=true}}
+          {{/each}}
+        </div>
+      {{/if}}
+
+      {{#if model.firstObject.tracks}}
+        <div class="search-results__container">
+          <h3 class="search-results__header">Tracks</h3>
+          {{#each model.firstObject.tracks as |track|}}
+            {{mf-track track=track}}
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  {{/if}}
+</div>

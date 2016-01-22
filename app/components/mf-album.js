@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['album'],
+  classNameBindings: ['listView:album--list-item'],
+  listView: false,
 
   didReceiveAttrs() {
     let album = this.get('album');
