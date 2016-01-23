@@ -24,6 +24,7 @@ const mopidyMock = Ember.Service.extend({
 const mockAlbum = {
   name: 'Test Album 1',
   uri: 'testalbum1',
+  date: '2016',
   tracks: [
     {
       name: 'Test Track 1',
@@ -46,7 +47,15 @@ test('should show image', function(assert) {
 
   this.render(hbs`{{mf-album album=album tracks=album.tracks}}`);
 
-  assert.equal(this.$('img').attr('src'), 'testimage3');
+  assert.equal(this.$('.album__image').data('image'), 'testimage3');
+});
+
+test('should show album name and date', function(assert) {
+  this.set('album', mockAlbum);
+
+  this.render(hbs`{{mf-album album=album tracks=album.tracks}}`);
+
+  assert.equal(this.$('.album__name').text().trim(), 'Test Album 1 (2016)');
 });
 
 test('should show 1 track', function(assert) {

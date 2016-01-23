@@ -1,32 +1,58 @@
 .album {
   margin-bottom: 50px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .album--list-item {
   margin-bottom: 0;
-}
 
-.album:last-child {
-  margin-bottom: 0;
+  .album__cover {
+    background: none;
+    border-top: none;
+  }
 }
 
 .album__cover {
+  display: flex;
+  align-items: center;
   background-color: lighten($gold, 25%);
   border-top: 1px solid $gold;
   border-bottom: 1px solid $gold;
-  height: 64px;
+  height: 65px;
+
+  color: $primary;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: lighten($primary, 60%);
+    cursor: pointer;
+  }
 }
 
-.album--list-item .album__cover {
-  background: none;
-  border-top: none;
+.album__image {
+  height: 64px;
+  width: 64px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.album__name {
+  margin: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .album__context-menu {
   float: right;
   margin-right: 20px;
+  margin-left: auto;
   font-size: 22px;
-  line-height: 64px;
+  line-height: 65px;
 
   &:hover {
     cursor: pointer;

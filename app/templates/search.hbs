@@ -12,11 +12,11 @@
       {{#if model.firstObject.artists}}
         <div class="search-results__container">
           <h3 class="search-results__header">Artists</h3>
-          <ul>
             {{#each model.firstObject.artists as |artist|}}
-              <li>{{artist.name}}</li>
+              {{#link-to "artist" artist.uri}}
+                {{mf-artist artist=artist}}
+              {{/link-to}}
             {{/each}}
-          </ul>
         </div>
       {{/if}}
 

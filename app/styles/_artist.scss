@@ -1,0 +1,28 @@
+.artist {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $gold;
+  height: 65px;
+  color: $primary;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: lighten($primary, 60%);
+    cursor: pointer;
+  }
+}
+
+.artist__image {
+  height: 64px;
+  width: 64px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.artist__name {
+  margin: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
