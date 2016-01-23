@@ -1,9 +1,25 @@
 .button {
   background: $primary;
+
+  &:hover,
+  &:focus {
+      background: darken($primary, 20%);
+      color: #fff;
+  }
+
+  &.hollow {
+    border: 1px solid $primary;
+    color: $primary;
+
+    &:hover,
+    &:focus {
+      border-color: darken($primary, 20%);
+      color: darken($primary, 20%);
+    }
+  }
 }
 
-.button:hover,
-.button:focus {
-    background: darken($primary, 20%);
-    color: #fff;
-}
+
+
+
+

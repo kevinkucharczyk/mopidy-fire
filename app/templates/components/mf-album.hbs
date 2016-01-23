@@ -2,7 +2,9 @@
 <div class="album__cover">
   <div class="album__image" style="background-image: url({{images.2.uri}})" data-image="{{images.2.uri}}"></div>
   <div class="album__name" title="{{album.name}} ({{album.artists.0.name}} {{album.date}})">
-    {{album.name}} ({{#if listView}}{{album.artists.0.name}} {{/if}}{{album.date}})
+    {{album.name}}{{#if listView}} ({{album.artists.0.name}}{{#if album.date}} {{album.date}}{{/if}})
+      {{else if album.date}} ({{album.date}})
+    {{/if}}
   </div>
   {{#mf-context-menu tagName="i" class="fa fa-ellipsis-h album__context-menu"
     play=(action 'play') add=(action 'add')

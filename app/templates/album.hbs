@@ -13,7 +13,13 @@
 </div>
 
 <div class="section-body">
-  {{#each model.tracks as |track|}}
-    {{mf-track track=track}}
-  {{/each}}
+  <div class="row">
+    <button type="button" class="button" {{action "play"}}>Play album</button>
+    <button type="button" class="button" {{action "add"}}>Add to queue</button>
+  </div>
+  <div>
+    {{#each model.tracks as |track|}}
+      {{mf-track track=track}}
+    {{/each}}
+  </div>
 </div>

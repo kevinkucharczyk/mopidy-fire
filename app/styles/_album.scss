@@ -12,6 +12,7 @@
   .album__cover {
     background: none;
     border-top: none;
+    height: 65px;
   }
 }
 
@@ -21,7 +22,7 @@
   background-color: lighten($gold, 25%);
   border-top: 1px solid $gold;
   border-bottom: 1px solid $gold;
-  height: 65px;
+  height: 66px;
 
   color: $primary;
   transition: background-color 0.2s ease;
