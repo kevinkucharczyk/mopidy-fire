@@ -2,18 +2,15 @@
 
 body {
   font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  color: $primary;
 }
 
-.content.full {
-  margin-right: 0;
-
-  transform: translate3d(0, 0, 0);
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
-.content.partial {
-  margin-right: 10em;
-
-  transform: translate3d(10em, 0, 0);
+.content {
+  transition: transform 0.2s ease;
 }
 
 .header {
@@ -113,13 +110,7 @@ body {
 }
 
 .section-body {
-  padding: 0 0 170px;
-}
-
-@media screen and (min-width: 40em) {
-  .section-body {
-    padding: 50px 50px 170px;
-  }
+  padding: 20px 20px 170px;
 }
 
 .footer {
@@ -136,11 +127,18 @@ body {
 .footer__track {
   margin: 5px 0;
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .footer__track-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
+}
+
+.footer__track-artist {
+  font-size: 14px;
 }
 
 .footer__controls {
@@ -157,4 +155,31 @@ body {
   display: inline-block;
   vertical-align: middle;
   margin: 0 10px;
+}
+
+
+@media screen and (min-width: 40em) {
+  .content.full {
+    margin-right: 0;
+
+    transform: translate3d(0, 0, 0);
+  }
+
+  .content.partial {
+    margin-right: 10em;
+
+    transform: translate3d(10em, 0, 0);
+  }
+
+  .section-body {
+    padding: 50px 50px 170px;
+  }
+
+  .footer__track-title {
+    font-size: 18px;
+  }
+
+  .footer__track-artist {
+    font-size: 16px;
+  }
 }

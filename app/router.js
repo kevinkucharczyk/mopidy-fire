@@ -8,7 +8,6 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('playlists');
   this.route('playlist', { path: '/playlist/:uri' });
-  this.route('browse');
   this.route('search');
   this.route('settings');
   this.route('queue');

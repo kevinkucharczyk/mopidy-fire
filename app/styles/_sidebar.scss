@@ -10,14 +10,16 @@
 
   background-color: $primary;
   box-shadow: 1px 0px 1px 0px $primary;
-}
 
-.sidebar.open {
-  transform: translate3d(0, 0, 0);
-}
+  transition: transform 0.2s ease;
 
-.sidebar.close {
-  transform: translate3d(-10em, 0, 0);
+  &.open {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.close {
+    transform: translate3d(-10em, 0, 0);
+  }
 }
 
 .sidebar__menu {
@@ -36,15 +38,15 @@
   color: $off-white;
 
   transition: all 0.2s ease;
-}
 
-.sidebar__menu-link:hover {
-  color: $off-white;
-  background-color: lighten($primary, 25%);
-}
+  &:hover {
+    color: $off-white;
+    background-color: lighten($primary, 25%);
+  }
 
-.sidebar__menu-link:focus,
-.sidebar__menu-link.active {
-  color: #000;
-  background-color: $gold;
+  &:focus,
+  &.active {
+    color: #000;
+    background-color: $gold;
+  }
 }

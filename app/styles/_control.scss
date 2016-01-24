@@ -1,24 +1,24 @@
 .control {
-  font-size: 28px;
+  font-size: 24px;
   color: $gold-light;
 
   transition: color 0.2s ease;
-}
 
-.control:hover, {
-  color: lighten($gold-light, 25%);
-}
+  &:hover {
+    color: lighten($gold-light, 25%);
+  }
 
-.control.inactive {
-  color: $accent;
-}
+  &.inactive {
+    color: $accent;
 
-.control.inactive:hover {
-  color: lighten($accent, 25%);
+    &:hover {
+      color: lighten($accent, 25%);
+    }
+  }
 }
 
 .control__icon {
-  margin: 10px;
+  margin: 6px;
 }
 
 .control__icon--volume {
@@ -29,4 +29,14 @@
 .control__icon--playpause {
   width: 24px;
   text-align: center;
+}
+
+@media screen and (min-width: 40em) {
+  .control {
+    font-size: 28px;
+  }
+
+  .control__icon {
+    margin: 10px;
+  }
 }

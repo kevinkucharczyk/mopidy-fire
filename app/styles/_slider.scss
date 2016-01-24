@@ -1,17 +1,17 @@
 .slider {
   width: 100%;
   display: inline-block;
-}
 
-.slider:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .slider__bar {
   position: relative;
   height: 5px;
   width: 100%;
-  margin: 20px 0;
+  margin: 15px 0;
   background-color: $accent;
 }
 
@@ -23,4 +23,10 @@
   width: 20%;
 
   background-color: $gold-light;
+}
+
+@media screen and (min-width: 40em) {
+  .slider__bar {
+    margin: 20px 0;
+  }
 }
