@@ -57,6 +57,7 @@ export default Ember.Component.extend({
 
     element.css('top', top + 'px');
     element.css('left', left + 'px');
+    element.detach().appendTo('.content');
     this._registerHandler();
   },
 

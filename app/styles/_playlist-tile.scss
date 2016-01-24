@@ -2,6 +2,16 @@
   padding: 0 20px 40px;
 
   font-size: 14px;
+
+  &:hover {
+    .playlist-tile__cover-overlay {
+      background-color: transparentize(#000, 0.9);
+    }
+
+    .playlist-tile__title {
+      color: darken($primary, 50%);
+    }
+  }
 }
 
 .playlist-tile__link {
@@ -15,8 +25,18 @@
   width: 100%;
 }
 
+.playlist-tile__cover-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 50;
+  background-color: transparentize(#000, 0.75);
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
 .playlist-tile__cover-image {
-  transition: opacity 0.25s ease;
   backface-visibility: hidden;
 }
 
@@ -26,26 +46,37 @@
 }
 
 .playlist-tile__context-menu {
-  padding: 0 5px;
-  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 8px;
+  z-index: 60;
 
-  background-color: darken($primary, 10%);
   color: #fff;
-  font-size: 22px;
-  text-align: right;
-  line-height: 22px;
+  font-size: 24px;
+  line-height: 24px;
+  transition: opacity 0.2s ease;
 }
 
 .playlist-tile__subtitle {
   color: lighten($primary, 25%);
 }
 
-.playlist-tile:hover {
-  .playlist-tile__cover-image {
-    opacity: 0.75;
+@media screen and (min-width: 40em) {
+  .playlist-tile__context-menu,
+  .playlist-tile__cover-overlay {
+    opacity: 0;
   }
 
-  .playlist-tile__title {
-    color: darken($primary, 50%);
+  .playlist-tile:hover {
+    .playlist-tile__context-menu,
+    .playlist-tile__cover-overlay {
+      opacity: 1;
+    }
+
+    .playlist-tile__cover-overlay {
+      background-color: transparentize(#000, 0.75);
+    }
   }
+
 }

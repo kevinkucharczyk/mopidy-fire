@@ -1,15 +1,18 @@
 {{#link-to "playlist" playlist.uri class="playlist-tile__link"}}
-  <img src={{playlist.images.1.uri}} class="playlist-tile__cover-image" />
+  <div class="playlist-tile__cover">
+    <div class="playlist-tile__cover-overlay"></div>
+    <img src={{playlist.images.1.uri}} class="playlist-tile__cover-image" />
 
-  {{#mf-context-menu tagName="i" class="fa fa-ellipsis-h playlist-tile__context-menu"
-    play=(action 'play') add=(action 'add')
-    as |component|}}
-    <ul class="context-menu__list">
-      <li class="context-menu__list-item" {{action 'handle' 'play' target=component}}>Play</li>
-      <hr class="context-menu__separator">
-      <li class="context-menu__list-item" {{action 'handle' 'add' target=component}}>Add to queue</li>
-    </ul>
-  {{/mf-context-menu}}
+    {{#mf-context-menu tagName="i" class="fa fa-ellipsis-h playlist-tile__context-menu"
+      play=(action 'play') add=(action 'add')
+      as |component|}}
+      <ul class="context-menu__list">
+        <li class="context-menu__list-item" {{action 'handle' 'play' target=component}}>Play</li>
+        <hr class="context-menu__separator">
+        <li class="context-menu__list-item" {{action 'handle' 'add' target=component}}>Add to queue</li>
+      </ul>
+    {{/mf-context-menu}}
+  </div>
 
   <div class="playlist-tile__title">{{playlist.name}}</div>
   <div class="playlist-tile__subtitle">{{trackCount}} track{{if tracksPlural 's'}}</div>
