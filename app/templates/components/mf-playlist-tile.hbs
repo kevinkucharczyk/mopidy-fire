@@ -5,6 +5,7 @@
 
     {{#mf-context-menu tagName="i" class="fa fa-ellipsis-h playlist-tile__context-menu"
       play=(action 'play') add=(action 'add')
+      attachTo=".content"
       as |component|}}
       <ul class="context-menu__list">
         <li class="context-menu__list-item" {{action 'handle' 'play' target=component}}>Play</li>

@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['context-menu'],
   isOpen: false,
+  attachTo: null,
 
   _closeHandler() {
     if(this.get('isOpen')) {
@@ -57,7 +58,9 @@ export default Ember.Component.extend({
 
     element.css('top', top + 'px');
     element.css('left', left + 'px');
-    element.detach().appendTo('.content');
+    if(this.get('attachTo')) {
+      element.detach().appendTo(this.get('attachTo'));
+    }
     this._registerHandler();
   },
 
