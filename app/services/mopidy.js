@@ -41,6 +41,7 @@ export default Ember.Service.extend({
   progressTracker: null,
 
   loaderService: Ember.inject.service('loader-service'),
+  titleService: Ember.inject.service('title-service'),
   localStorage: Ember.inject.service('local-storage'),
 
   init() {
@@ -135,6 +136,9 @@ export default Ember.Service.extend({
   _initPlayer() {
     this._call('playback', 'getCurrentTrack').then((data) => {
       this.set('currentTrack', data);
+      if(data) {
+        this.get('titleService').setTitle(data.name + ' - ' + data.artists[0].name);
+      }
     });
 
     this._call('playback', 'getTimePosition').then((data) => {
@@ -181,6 +185,7 @@ export default Ember.Service.extend({
       this.set('currentTrack', track);
       this.set('isPlaying', true);
       this.set('currentPosition', 0);
+      this.get('titleService').setTitle(track.name + ' - ' + track.artists[0].name);
       this.get('progressTracker').start();
     });
 
@@ -190,6 +195,7 @@ export default Ember.Service.extend({
       this.set('currentTrack', track);
       this.set('isPlaying', true);
       this.set('currentPosition', timePosition);
+      this.get('titleService').setTitle(track.name + ' - ' + track.artists[0].name);
       this.get('progressTracker').start();
     });
 
