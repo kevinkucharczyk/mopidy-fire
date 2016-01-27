@@ -45,29 +45,40 @@ export default Ember.Route.extend({
 
     let albums = [],
       singles = [],
-      appearsOn = [];
+      appearsOn = [],
+      albumUris = [],
+      promiseArray = [];
 
     _.forEachRight(allAlbums, (album) => {
       let tracks = tracksByAlbum[album.uri];
-      let albumObject = { album: album, tracks: tracks };
+      album['tracks'] = tracks;
+      albumUris.push(album.uri);
 
       if (album.artists[0].uri === uri) { // check if main artist or 3rd party album
         if (tracks.length > 4) { // full album or single
-          albums.push(albumObject);
+          albums.push(album);
         }
         else {
-          singles.push(albumObject);
+          singles.push(album);
         }
       }
       else {
-        appearsOn.push(albumObject);
+        appearsOn.push(album);
       }
+
+      let result = this.get('mopidy').getImages([album.uri]).then((response) => {
+        album['images'] = response[album.uri];
+        return album;
+      });
+      promiseArray.push(result);
     });
 
     return {
       albums: albums,
       singles: singles,
-      appearsOn: appearsOn
+      appearsOn: appearsOn,
+      albumUris: albumUris,
+      promiseArray: promiseArray
     };
   },
 
@@ -84,12 +95,16 @@ export default Ember.Route.extend({
       return this.get('mopidy').getImages([artist.uri]).then((data) => {
         artist['images'] = data[artist.uri];
 
-        return {
-          artist: artist,
-          albums: extractedAlbums.albums,
-          singles: extractedAlbums.singles,
-          appearsOn: extractedAlbums.appearsOn
-        };
+        return Ember.RSVP.all(extractedAlbums.promiseArray).then(() => {
+          return {
+            artist: artist,
+            albums: extractedAlbums.albums,
+            singles: extractedAlbums.singles,
+            appearsOn: extractedAlbums.appearsOn
+          };
+
+        });
+
       });
     });
   }

@@ -10,7 +10,37 @@
 </div>
 
 <div class="section-body">
-  {{#each model.albums as |album|}}
-    {{mf-album album=album.album tracks=album.tracks}}
-  {{/each}}
+  {{#if model.albums}}
+    <div class="artist__album-container">
+      <h3 class="artist__album-header">Albums</h3>
+      <div class="row playlist-tiles">
+        {{#each model.albums as |album|}}
+          {{mf-playlist-tile playlist=album linkType="album"}}
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if model.singles}}
+    <div class="artist__album-container">
+      <h3 class="artist__album-header">Singles</h3>
+      <div class="row playlist-tiles">
+        {{#each model.singles as |album|}}
+          {{mf-playlist-tile playlist=album linkType="album"}}
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+
+
+  {{#if model.appearsOn}}
+    <div class="artist__album-container">
+      <h3 class="artist__album-header">Appears on</h3>
+      <div class="row playlist-tiles">
+        {{#each model.appearsOn as |album|}}
+          {{mf-playlist-tile playlist=album linkType="album"}}
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
 </div>
