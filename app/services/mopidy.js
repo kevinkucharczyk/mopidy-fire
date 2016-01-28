@@ -412,6 +412,8 @@ export default Ember.Service.extend({
   },
 
   search(query) {
-    return this._call('library', 'search', { any: [query]});
+    return this._call('library', 'search', { any: [query] }).then((result) => {
+      return result;
+    });
   }
 });

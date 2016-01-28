@@ -9,10 +9,10 @@
 
   {{#if model}}
     <div class="search-results">
-      {{#if model.firstObject.artists}}
+      {{#if model.artists}}
         <div class="search-results__container">
           <h3 class="search-results__header">Artists</h3>
-            {{#each model.firstObject.artists as |artist|}}
+            {{#each model.artists as |artist|}}
               {{#link-to "artist" artist.uri}}
                 {{mf-artist artist=artist}}
               {{/link-to}}
@@ -20,19 +20,21 @@
         </div>
       {{/if}}
 
-      {{#if model.firstObject.albums}}
+      {{#if model.albums}}
         <div class="search-results__container">
-          <h3 class="search-results__header">Albums</h3>
-          {{#each model.firstObject.albums as |album|}}
-            {{mf-album album=album listView=true}}
-          {{/each}}
+          <h3 class="search-results__header search-results__header--margined">Albums</h3>
+          <div class="row playlist-tiles">
+            {{#each model.albums as |album|}}
+              {{mf-playlist-tile playlist=album linkType="album"}}
+            {{/each}}
+          </div>
         </div>
       {{/if}}
 
-      {{#if model.firstObject.tracks}}
+      {{#if model.tracks}}
         <div class="search-results__container">
           <h3 class="search-results__header">Tracks</h3>
-          {{#each model.firstObject.tracks as |track|}}
+          {{#each model.tracks as |track|}}
             {{mf-track track=track}}
           {{/each}}
         </div>
