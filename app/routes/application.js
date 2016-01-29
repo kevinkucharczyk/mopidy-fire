@@ -15,23 +15,29 @@ export default Ember.Route.extend({
   _hideMenu() {
     let sidebar = Ember.$('.sidebar');
     let content = Ember.$('.content');
+    let loader = Ember.$('.loader__image');
     sidebar.removeClass('open close').addClass('close');
     content.removeClass('full partial').addClass('full');
+    loader.removeClass('full partial').addClass('full');
   },
 
   _showMenu() {
     let sidebar = Ember.$('.sidebar');
     let content = Ember.$('.content');
+    let loader = Ember.$('.loader__image');
     sidebar.removeClass('open close').addClass('open');
     content.removeClass('full partial').addClass('partial');
+    loader.removeClass('full partial').addClass('partial');
   },
 
   _toggleMenu() {
     Ember.run(() => {
       let sidebar = Ember.$('.sidebar');
       let content = Ember.$('.content');
+      let loader = Ember.$('.loader__image');
       sidebar.toggleClass('open close');
       content.toggleClass('full partial');
+      loader.toggleClass('full partial');
     });
   },
 
