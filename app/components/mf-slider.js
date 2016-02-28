@@ -16,5 +16,9 @@ export default Ember.Component.extend({
     }
 
     this.get('onMouseUp')(targetPosition);
-  }
+  },
+
+  sliderWidth: Ember.computed('currentPosition', function() {
+    return new Ember.Handlebars.SafeString('width:' + this.get('currentPosition') + '%');
+  })
 });
