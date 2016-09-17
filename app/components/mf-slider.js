@@ -19,6 +19,6 @@ export default Ember.Component.extend({
   },
 
   sliderWidth: Ember.computed('currentPosition', function() {
-    return new Ember.Handlebars.SafeString('width:' + this.get('currentPosition') + '%');
+    return new Ember.String.htmlSafe('width:' + this.get('currentPosition') + '%');
   })
 });

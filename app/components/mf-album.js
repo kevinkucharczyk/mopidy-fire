@@ -5,6 +5,11 @@ export default Ember.Component.extend({
   classNameBindings: ['listView:album--list-item'],
   listView: false,
 
+  backgroundImage: Ember.computed('images', function() {
+    var bg = this.get('images.2.uri');
+    return Ember.String.htmlSafe('background-image: ' + bg);
+  }),
+
   didReceiveAttrs() {
     let album = this.get('album');
 

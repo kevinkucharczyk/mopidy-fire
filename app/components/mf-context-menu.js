@@ -94,6 +94,7 @@ export default Ember.Component.extend({
 
   willDestroyElement() {
     Ember.$(document).off('mf.contextMenu:hide');
+    this.set('isOpen', false);
   },
 
   actions: {

@@ -72,5 +72,3 @@ test('correctly calls external actions through component action', function(asser
 
   assert.ok(this.$('.context-menu__content').hasClass('open'), 'keeps context menu open after second click');
 });
-
-
