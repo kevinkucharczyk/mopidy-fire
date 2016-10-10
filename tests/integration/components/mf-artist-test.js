@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import page from '../../pages/artists';
 
 const mopidyMock = Ember.Service.extend({
   getImages(args) {
@@ -32,21 +33,23 @@ moduleForComponent('mf-artist', 'Integration | Component | mf artist', {
   beforeEach: function() {
     this.container.registry.register('service:mopidy', mopidyMock);
     this.container.registry.injection('component', 'mopidy', 'service:mopidy');
+    this.set('artist', mockArtist);
+    page.setContext(this);
+  },
+
+  afterEach() {
+    page.removeContext();
   }
 });
 
 test('should show image', function(assert) {
-  this.set('artist', mockArtist);
+  page.render(hbs`{{mf-artist artist=artist}}`);
 
-  this.render(hbs`{{mf-artist artist=artist}}`);
-
-  assert.equal(this.$('.artist__image').data('image'), 'testimage3');
+  assert.equal(page.artistImage, 'testimage3');
 });
 
 test('should show artist name', function(assert) {
-  this.set('artist', mockArtist);
+  page.render(hbs`{{mf-artist artist=artist}}`);
 
-  this.render(hbs`{{mf-artist artist=artist}}`);
-
-  assert.equal(this.$('.artist__name').text().trim(), 'Test Artist 1');
+  assert.equal(page.artistName, 'Test Artist 1');
 });

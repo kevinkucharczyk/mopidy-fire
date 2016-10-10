@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import page from '../../pages/track';
 
 const trackMock = {
   name: 'Test Track',
@@ -15,37 +16,45 @@ const trackMock = {
 };
 
 moduleForComponent('mf-track', 'Integration | Component | mf track', {
-  integration: true
+  integration: true,
+
+  beforeEach: function() {
+    page.setContext(this);
+  },
+
+  afterEach() {
+    page.removeContext();
+  }
 });
 
 test('should show track title', function(assert) {
   this.set('track', trackMock);
-  
+
   this.render(hbs`{{mf-track track=track}}`);
 
-  assert.equal(this.$('.track__title').text().trim(), 'Test Track');
+  assert.equal(page.trackTitle, 'Test Track');
 });
 
 test('should show track artist', function(assert) {
   this.set('track', trackMock);
-  
+
   this.render(hbs`{{mf-track track=track}}`);
 
-  assert.equal(this.$('.track__artist').text().trim(), 'Test Artist');
+  assert.equal(page.trackArtist, 'Test Artist');
 });
 
 test('should show track album', function(assert) {
   this.set('track', trackMock);
-  
+
   this.render(hbs`{{mf-track track=track}}`);
 
-  assert.equal(this.$('.track__album').text().trim(), 'Test Album');
+  assert.equal(page.trackAlbum, 'Test Album');
 });
 
 test('should show track duration', function(assert) {
   this.set('track', trackMock);
-  
+
   this.render(hbs`{{mf-track track=track}}`);
 
-  assert.equal(this.$('.track__duration').text().trim(), '1:00');
+  assert.equal(page.trackDuration, '1:00');
 });
