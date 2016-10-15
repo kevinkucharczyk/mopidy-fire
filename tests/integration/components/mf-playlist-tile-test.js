@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import page from '../../pages/playlist-tile';
 
 const longPlaylist = {
   name: 'Test Playlist 1',
@@ -56,7 +57,15 @@ const noPlaylist = {
 };
 
 moduleForComponent('mf-playlist-tile', 'Integration | Component | mf playlist tile', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    page.setContext(this);
+  },
+
+  afterEach() {
+    page.removeContext();
+  }
 });
 
 test('should show playlist title', function(assert) {
@@ -64,34 +73,34 @@ test('should show playlist title', function(assert) {
 
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
 
-  assert.equal(this.$('.playlist-tile__title').text().trim(), 'Test Playlist 1');
+  assert.equal(page.title, 'Test Playlist 1');
 });
 
 test('should show playlist track count 2', function(assert) {
   this.set('playlist', longPlaylist);
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
 
-  assert.equal(this.$('.playlist-tile__subtitle').text().trim(), '2 tracks');
+  assert.equal(page.subtitle, '2 tracks');
 });
 
 test('should show playlist track count 1', function(assert) {
   this.set('playlist', shortPlaylist);
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
 
-  assert.equal(this.$('.playlist-tile__subtitle').text().trim(), '1 track');
+  assert.equal(page.subtitle, '1 track');
 });
 
 test('should show playlist track count 0', function(assert) {
   this.set('playlist', noPlaylist);
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
 
-  assert.equal(this.$('.playlist-tile__subtitle').text().trim(), '0 tracks');
+  assert.equal(page.subtitle, '0 tracks');
 });
 
 test('should show playlist medium image', function(assert) {
   this.set('playlist', longPlaylist);
   this.render(hbs`{{mf-playlist-tile playlist=playlist}}`);
 
-  assert.equal(this.$('.playlist-tile__cover-image').attr('src'), 'testimage2');
+  assert.equal(page.image, 'testimage2');
 });
 
