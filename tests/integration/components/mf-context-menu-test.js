@@ -1,14 +1,23 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import page from '../../pages/context-menu';
 
 moduleForComponent('mf-context-menu', 'Integration | Component | mf context menu', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    page.setContext(this);
+  },
+
+  afterEach() {
+    page.removeContext();
+  }
 });
 
 test('it renders', function(assert) {
   this.render(hbs`{{mf-context-menu}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(page.content.trim(), '');
 
   this.render(hbs`
     {{#mf-context-menu}}
@@ -16,7 +25,7 @@ test('it renders', function(assert) {
     {{/mf-context-menu}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(page.content.trim(), 'template block text');
 });
 
 test('correctly shows and hides popover', function(assert) {
@@ -29,14 +38,14 @@ test('correctly shows and hides popover', function(assert) {
     {{/mf-context-menu}}
   `);
 
-  this.$('.first-menu').click();
+  page.toggleFirst();
 
-  assert.ok(this.$('.first-menu .context-menu__content').hasClass('open'));
+  assert.ok(page.firstIsOpen);
 
-  this.$('.second-menu').click();
+  page.toggleSecond();
 
-  assert.notOk(this.$('.first-menu .context-menu__content').hasClass('open'));
-  assert.ok(this.$('.second-menu .context-menu__content').hasClass('open'));
+  assert.notOk(page.firstIsOpen);
+  assert.ok(page.secondIsOpen);
 });
 
 test('correctly calls external actions through component action', function(assert) {
@@ -56,19 +65,19 @@ test('correctly calls external actions through component action', function(asser
     {{/mf-context-menu}}
   `);
 
-  this.$('i').click();
+  page.toggle();
 
-  assert.ok(this.$('.context-menu__content').hasClass('open'), 'opens context menu after first click');
+  assert.ok(page.isOpen, 'opens context menu after first click');
 
   this.$('#first-button').click();
 
-  assert.notOk(this.$('.context-menu__content').hasClass('open'), 'closes context menu after first click');
+  assert.notOk(page.isOpen, 'closes context menu after first click');
 
-  this.$('i').click();
+  page.toggle();
 
-  assert.ok(this.$('.context-menu__content').hasClass('open'), 'opens context menu after second click');
+  assert.ok(page.isOpen, 'opens context menu after second click');
 
   this.$('#second-button').click();
 
-  assert.ok(this.$('.context-menu__content').hasClass('open'), 'keeps context menu open after second click');
+  assert.ok(page.isOpen, 'keeps context menu open after second click');
 });
